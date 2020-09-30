@@ -48,8 +48,6 @@ function BasicUserOpScreen(props) {
       });
   }, []);
 
-  function onSelected(id) { }
-
   function closeRow(rowMap, rowKey) {
     if (rowMap[rowKey]) {
       rowMap[rowKey].closeRow();
