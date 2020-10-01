@@ -4,7 +4,9 @@ import {
   SCAN_CONNECT_BLE,
   CONNECTED_DEVICE,
   UPDATE_STATUS,
+  CLEAR_BLE_LIST
 } from '../../constants/actionTypes.js';
+import { CONNECTED } from '../../constants/bleManagerStatus.js';
 import { requestBlePermission } from '../../helpers/requestBlePermission.js';
 
 const initialState = {
@@ -72,19 +74,10 @@ export default function bleManagerReducer(state = initialState, action) {
   switch (action.type) {
     case SCAN_CONNECT_BLE:
       console.log('Running SCAN_CONNECT_BLE...');
-      console.log('action:');
-      console.log(action);
       if (
         state.bleList.some((device) => device.id === action.device.id) ||
         action.device.name === null) {
         console.log('Not updating state.');
-        // const deviceAlreadyInBleList = state.bleList.some(device);
-        // console.log('state.bleList.device.id:');
-        // console.log(deviceAlreadyInBleList);
-        console.log('action.device.name:');
-        console.log(action.device.name);
-        console.log('Returning state:');
-        console.log(state);
         return state;
       }
       else {
@@ -102,16 +95,26 @@ export default function bleManagerReducer(state = initialState, action) {
       return {
         bleList: state.bleList,
         connectedDevice: action.connectedDevice,
-        status: action.status,
+        status: CONNECTED,
       };
 
     case UPDATE_STATUS:
-      console.log('Change status', action.status);
+      if (state.status === action.status) {
+        return state;
+      }
+      console.log('Change status:', action.status);
       return {
         bleList: state.bleList,
         connectedDevice: action.connectedDevice,
         status: action.status,
       };
+
+    case CLEAR_BLE_LIST:
+      return {
+        bleList: [],
+        connectedDevice: {},
+        status: state.status
+      }
 
     default:
       return state;

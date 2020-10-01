@@ -33,7 +33,7 @@ function ConnectedIntensitySlider(props) {
       intensity: Math.round(newIntensity),
       nickname: props.nickname,
     };
-    console.log(props.bleManager);
+    console.log(props.bleManager.connectedDevice);
     props.updateIntensity(groupInfo);
   }
 

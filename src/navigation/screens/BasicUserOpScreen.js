@@ -10,18 +10,20 @@ import {
 } from 'react-native';
 import { useTheme, useNavigation } from '@react-navigation/native';
 import { connect } from 'react-redux';
+import Animated from 'react-native-reanimated';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import IntensitySlider from '../../components/IntensitySlider.js';
 import { startBleScan } from '../../redux/thunk/startBleScan.js';
 import { connectDevice } from '../../redux/thunk/connectDevice.js';
-import Animated from 'react-native-reanimated';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { CONNECTED, SCANNING } from '../../constants/bleManagerStatus'
 
 // Connect Redux state.
 function mapStateToProps(state) {
   return {
     groups: state.groups.groups,
     bleList: state.bleManager['bleList'],
+    bleManager: state.bleManager,
   };
 }
 
@@ -54,16 +56,6 @@ function BasicUserOpScreen(props) {
     }
   }
 
-  function deleteRow(rowMap, rowKey) {
-    closeRow(rowMap, rowKey);
-    let newData = [...listViewData];
-    const prevIndex = sectionListData[section].data.findIndex(
-      (item) => item.key === rowKey
-    );
-    newData[section].data.splice(prevIndex, 1);
-    setListViewData({ newData });
-  }
-
   function handleClick(device) {
     props.connectDevice(device);
   }
@@ -77,6 +69,21 @@ function BasicUserOpScreen(props) {
         nickname={item.nickname}
       />
     );
+  }
+
+  function BleDevicesFlatList() {
+    if (props.bleManager.status === SCANNING) {
+      return (
+        <FlatList
+          data={props.bleList}
+          extraData={props.bleList}
+          renderItem={(data) => renderBleDevices(data)}
+        />
+      )
+    }
+    else {
+      return null;
+    }
   }
 
   function renderBleDevices(data) {
@@ -95,11 +102,11 @@ function BasicUserOpScreen(props) {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={props.bleList}
-        extraData={props.bleList}
-        renderItem={(data) => renderBleDevices(data)}
-      />
+      {(props.bleManager.status === CONNECTED && props.bleManager.connectedDevice)
+        ? <Text style={styles.status}>{props.bleManager.status} to: {props.bleManager.connectedDevice.name}</Text>
+        : <Text style={styles.status}>{props.bleManager.status}</Text>
+      }
+      <BleDevicesFlatList />
       <FlatList
         data={props.groups}
         renderItem={renderGroupList}
@@ -120,27 +127,6 @@ function createStyle() {
     text: {
       color: colors.text,
     },
-    standalone: {
-      marginTop: 30,
-      marginBottom: 30,
-    },
-    standaloneRowFront: {
-      alignItems: 'center',
-      backgroundColor: '#CCC',
-      justifyContent: 'center',
-      height: 50,
-    },
-    standaloneRowBack: {
-      alignItems: 'center',
-      backgroundColor: '#8BC645',
-      flex: 1,
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      padding: 15,
-    },
-    backTextWhite: {
-      color: '#FFF',
-    },
     rowFront: {
       alignSelf: 'center',
       backgroundColor: '#ccc',
@@ -151,49 +137,12 @@ function createStyle() {
 
       width: 200,
     },
-    rowBack: {
-      alignItems: 'center',
-      backgroundColor: '#DDD',
+    statusContainer: {
       flex: 1,
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      paddingLeft: 15,
-    },
-    backRightBtn: {
       alignItems: 'center',
-      bottom: 0,
-      justifyContent: 'center',
-      position: 'absolute',
-      top: 0,
-      width: 75,
     },
-    backRightBtnLeft: {
-      backgroundColor: 'blue',
-      right: 75,
-    },
-    backRightBtnRight: {
-      backgroundColor: 'red',
-      right: 0,
-    },
-    controls: {
-      alignItems: 'center',
-      marginBottom: 30,
-    },
-    switchContainer: {
-      flexDirection: 'row',
-      justifyContent: 'center',
-      marginBottom: 5,
-    },
-    switch: {
-      alignItems: 'center',
-      borderWidth: 1,
-      borderColor: 'black',
-      paddingVertical: 10,
-      width: Dimensions.get('window').width / 4,
-    },
-    trash: {
-      height: 25,
-      width: 25,
+    status: {
+      color: colors.text,
     },
   });
   return styles;
