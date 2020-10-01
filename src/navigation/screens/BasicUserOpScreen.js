@@ -14,9 +14,10 @@ import Animated from 'react-native-reanimated';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import IntensitySlider from '../../components/IntensitySlider.js';
+import ConnectionStatusBar from '../../components/ConnectionStatusBar.js';
 import { startBleScan } from '../../redux/thunk/startBleScan.js';
 import { connectDevice } from '../../redux/thunk/connectDevice.js';
-import { CONNECTED, SCANNING } from '../../constants/bleManagerStatus'
+import { CONNECTED, SCANNING } from '../../constants/bleManagerStatus';
 
 // Connect Redux state.
 function mapStateToProps(state) {
@@ -102,10 +103,7 @@ function BasicUserOpScreen(props) {
 
   return (
     <View style={styles.container}>
-      {(props.bleManager.status === CONNECTED && props.bleManager.connectedDevice)
-        ? <Text style={styles.status}>{props.bleManager.status} to: {props.bleManager.connectedDevice.name}</Text>
-        : <Text style={styles.status}>{props.bleManager.status}</Text>
-      }
+      <ConnectionStatusBar />
       <BleDevicesFlatList />
       <FlatList
         data={props.groups}
@@ -122,7 +120,6 @@ function createStyle() {
     container: {
       flex: 1,
       alignContent: 'center',
-      marginTop: StatusBar.currentHeight,
     },
     text: {
       color: colors.text,
@@ -134,16 +131,8 @@ function createStyle() {
       borderWidth: 1,
       justifyContent: 'center',
       height: 50,
-
       width: 200,
-    },
-    statusContainer: {
-      flex: 1,
-      alignItems: 'center',
-    },
-    status: {
-      color: colors.text,
-    },
+    }
   });
   return styles;
 }
