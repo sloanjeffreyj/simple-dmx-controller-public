@@ -37,6 +37,10 @@ function ConnectedIntensitySlider(props) {
     props.updateIntensity(groupInfo);
   }
 
+  if (props.nickname === '') {
+    return null;
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>
@@ -48,6 +52,7 @@ function ConnectedIntensitySlider(props) {
         minimumValue={0}
         onValueChange={(value) => handleIntensityChange(value)}
         maximumTrackTintColor={'#C0C0C0'}
+        style={styles.slider}
         value={props.intensity}
       />
     </View>
@@ -58,12 +63,21 @@ function createStyle() {
   const { colors } = useTheme();
   const styles = StyleSheet.create({
     container: {
-      width: 380,
-      height: 90,
+      alignContent: 'center',
       backgroundColor: colors.background,
+      height: 90,
+      justifyContent: 'center',
+      marginBottom: 10,
+      marginTop: 20,
+      width: '100%',
+    },
+    slider: {
+      height: 40,
+      paddingBottom: 10,
     },
     text: {
       color: colors.text,
+      fontSize: 20,
     },
   });
   return styles;

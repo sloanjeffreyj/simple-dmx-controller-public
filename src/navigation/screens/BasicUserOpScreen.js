@@ -14,6 +14,7 @@ import Animated from 'react-native-reanimated';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import IntensitySlider from '../../components/IntensitySlider.js';
+import IntensityFlatListSeperator from '../../components/IntensityFlatListSeperator.js';
 import ConnectionStatusBar from '../../components/ConnectionStatusBar.js';
 import { startBleScan } from '../../redux/thunk/startBleScan.js';
 import { connectDevice } from '../../redux/thunk/connectDevice.js';
@@ -107,8 +108,9 @@ function BasicUserOpScreen(props) {
       <BleDevicesFlatList />
       <FlatList
         data={props.groups}
-        renderItem={renderGroupList}
+
         keyExtractor={(item) => item.id}
+        renderItem={renderGroupList}
       />
     </View>
   );
@@ -118,8 +120,8 @@ function createStyle() {
   const { colors } = useTheme();
   const styles = StyleSheet.create({
     container: {
-      flex: 1,
       alignContent: 'center',
+      margin: '3%',
     },
     text: {
       color: colors.text,

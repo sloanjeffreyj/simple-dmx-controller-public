@@ -108,17 +108,20 @@ function createStyle() {
   const styles = StyleSheet.create({
     container: {
       backgroundColor: colors.primary,
+      borderRadius: 20,
       justifyContent: 'space-around',
       width: 380,
       height: 90,
-      borderRadius: 20,
-      padding: 8,
+      paddingLeft: 8,
       margin: 8,
     },
     circuitsContainer: {
+      flex: 1,
       flexDirection: 'row',
     },
     groupNameContainer: {
+      alignItems: 'center',
+      flex: 1,
       flexDirection: 'row',
     },
     text: {
@@ -126,7 +129,6 @@ function createStyle() {
       fontSize: 18,
     },
     textInput: {
-      textAlign: 'center',
       color: colors.text,
       fontSize: 18,
       backgroundColor: 'rgba(255, 165, 20, 0.2)',
@@ -135,6 +137,7 @@ function createStyle() {
       borderWidth: 2,
       paddingLeft: 4,
       paddingRight: 4,
+      textAlign: 'center',
     },
   });
   return styles;

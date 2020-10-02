@@ -36,6 +36,7 @@ function createStyle() {
       backgroundColor: 'rgba(251, 253, 0, 0.5)',
       borderRadius: 10,
       color: colors.text,
+      fontSize: 16,
       margin: 5,
       padding: 5,
     },
@@ -43,6 +44,7 @@ function createStyle() {
       backgroundColor: 'rgba(15, 146, 30, 0.6)',
       borderRadius: 10,
       color: colors.text,
+      fontSize: 16,
       margin: 5,
       padding: 5,
     }
