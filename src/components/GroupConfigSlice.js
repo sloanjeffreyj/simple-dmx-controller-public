@@ -46,12 +46,24 @@ function ConnectGroupConfigSlice(props) {
     let formattedString = formatCircuitText(value.nativeEvent.text);
     formattedString = formattedString.split(',');
 
-    // Turn into array of numbers
+    // Turn ranges of numbers (ex. 10-20) into individual int's separated by commas.
+    // Handle range of numbers from user input (ex. 20-45). Transformed into all numbers inbetween.
+    // if (x.indexOf('-') > -1) {
+    //   let circuitRangeString = x.split('-');
+    //   let beginRange = parseInt(circuitRange[0]);
+    //   let endRange = parseInt(circuitRange[2]);
+    //   let rangeIndex = beginRange;
+    //   while (beginRange < endRange) {
+
+    //   }
+    // }
+
+    // Turn into array of numbers.
     let numArr = formattedString.map((x) => {
       return parseInt(x, 10);
     });
 
-    // Filter out non numbers that slipped through
+    // Filter out non numbers that slipped through.
     let circuitsPayload = numArr.filter((item) => {
       return !isNaN(item);
     });
@@ -71,7 +83,7 @@ function ConnectGroupConfigSlice(props) {
   // Format circuits for display
   function formatCircuitText(circuits) {
     let unformattedCircuits = JSON.stringify(circuits);
-    let formattedCircuits = unformattedCircuits.replace(/[^0-9,]/g, '');
+    let formattedCircuits = unformattedCircuits.replace(/[^0-9,-]/g, '');
     return formattedCircuits;
   }
 
