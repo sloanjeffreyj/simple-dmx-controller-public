@@ -96,7 +96,7 @@ function BasicUserOpScreen(props) {
         underlayColor={'#aaa'}
       >
         <View>
-          <Text>Tap to connect to: {data.item.name}</Text>
+          <Text style={styles.text}>Tap to connect to: {data.item.name}</Text>
         </View>
       </TouchableHighlight>
     );
@@ -108,7 +108,6 @@ function BasicUserOpScreen(props) {
       <BleDevicesFlatList />
       <FlatList
         data={props.groups}
-
         keyExtractor={(item) => item.id}
         renderItem={renderGroupList}
       />
@@ -128,12 +127,14 @@ function createStyle() {
     },
     rowFront: {
       alignSelf: 'center',
-      backgroundColor: '#ccc',
-      borderBottomColor: '#fff',
+      alignItems: 'center',
+      backgroundColor: colors.card,
+      borderBottomColor: colors.background,
+      borderRadius: 15,
       borderWidth: 1,
       justifyContent: 'center',
       height: 50,
-      width: 200,
+      width: '70%',
     }
   });
   return styles;
