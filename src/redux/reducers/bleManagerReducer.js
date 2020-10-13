@@ -68,21 +68,15 @@ const initialState = {
 // }
 
 export default function bleManagerReducer(state = initialState, action) {
-  console.log('Inside bleManagerReducer, action.type:');
-  console.log(action.type);
-
   switch (action.type) {
     case SCAN_CONNECT_BLE:
-      console.log('Running SCAN_CONNECT_BLE...');
       if (
         state.bleList.some((device) => device.id === action.device.id) ||
         action.device.name === null) {
-        console.log('Not updating state.');
         return state;
       }
       else {
         const newBle = [...state.bleList, action.device];
-        console.log('Updating SCAN_CONNECT_BLE');
         return {
           bleList: newBle,
           connectedDevice: state.connectedDevice,
@@ -91,7 +85,6 @@ export default function bleManagerReducer(state = initialState, action) {
       }
 
     case CONNECTED_DEVICE:
-      console.log('Reducer connected device', action);
       return {
         bleList: state.bleList,
         connectedDevice: action.connectedDevice,
@@ -102,7 +95,6 @@ export default function bleManagerReducer(state = initialState, action) {
       if (state.status === action.status) {
         return state;
       }
-      console.log('Change status:', action.status);
       return {
         bleList: state.bleList,
         connectedDevice: action.connectedDevice,

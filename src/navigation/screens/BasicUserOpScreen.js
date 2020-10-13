@@ -43,7 +43,6 @@ function BasicUserOpScreen(props) {
   const [sectionListData, setSectionListData] = useState();
 
   useEffect(() => {
-    console.log('BasicUserOpScreen is running startBleScan...');
     props.startBleScan();
     Array(props.bleList.length)
       .fill('')

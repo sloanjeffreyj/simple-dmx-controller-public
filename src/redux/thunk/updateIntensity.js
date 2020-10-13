@@ -3,15 +3,11 @@ import { updateStatus } from '../actions/bleManagerActions.js';
 import { setGroupIntensity } from '../actions/setGroupIntensity.js';
 
 export const updateIntensity = (groupInfo) => {
-  console.log('groupInfo:');
-  console.log(groupInfo);
   return (dispatch, getState, DeviceManager) => {
     const state = getState();
     const groupInfoBase64 = charBase64.btoa(
       groupInfo.intensity.toString() + ',' + groupInfo.circuits.toString()
     );
-    console.log('Intensity:');
-    console.log(groupInfoBase64);
     try {
       let dmxControllerResponse = state.bleManager.connectedDevice.writeCharacteristicWithResponseForService(
         '4fafc201-1fb5-459e-8fcc-c5c9c331914b',

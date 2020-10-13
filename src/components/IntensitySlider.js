@@ -33,7 +33,6 @@ function ConnectedIntensitySlider(props) {
       intensity: Math.round(newIntensity),
       nickname: props.nickname,
     };
-    console.log(props.bleManager.connectedDevice);
     props.updateIntensity(groupInfo);
   }
 
@@ -50,7 +49,7 @@ function ConnectedIntensitySlider(props) {
       <Slider
         maximumValue={255}
         minimumValue={0}
-        onValueChange={(value) => handleIntensityChange(value)}
+        onSlidingComplete={(value) => handleIntensityChange(value)}
         maximumTrackTintColor={'#C0C0C0'}
         style={styles.slider}
         value={props.intensity}
