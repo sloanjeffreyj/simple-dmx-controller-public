@@ -5,8 +5,8 @@ export async function requestBlePermission() {
     const granted = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
       {
-        title: 'Location permission for bluetooth scanning',
-        message: 'wahtever',
+        title: 'Location Permission for Bluetooth Scanning',
+        message: 'This app uses Bluetooth to connect, which is controlled under location services.',
         buttonNeutral: 'Ask Me Later',
         buttonNegative: 'Cancel',
         buttonPositive: 'OK',

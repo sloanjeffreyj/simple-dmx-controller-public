@@ -1,16 +1,25 @@
 import { bleScan } from './bleScan.js';
 import { updateStatus } from '../actions/bleManagerActions.js';
-import { INITIALIZED } from '../../constants/bleManagerStatus.js';
+import { INITIALIZED, MISSING_BLE_PERMISSION } from '../../constants/bleManagerStatus.js';
 import { requestBlePermission } from '../../helpers/requestBlePermission.js';
 
 export const startBleScan = () => {
   return (dispatch, getState, DeviceManager) => {
     const subscription = DeviceManager.onStateChange((state) => {
       if (state === 'PoweredOn') {
-        requestBlePermission();
-        dispatch(updateStatus(INITIALIZED));
-        dispatch(bleScan());
-        subscription.remove();
+        const blePermissionGranted = requestBlePermission()
+        .then(() => {
+          if (blePermissionGranted) {
+            dispatch(updateStatus(INITIALIZED));
+          }
+          else {
+            dispatch(updateStatus(MISSING_BLE_PERMISSION));
+          }
+        })
+        .then(() => {
+          dispatch(bleScan())
+          subscription.remove();
+        })
       }
     }, true);
   };

@@ -1,5 +1,5 @@
 import { updateStatus, scanConnectBle, clearBleList } from '../actions/bleManagerActions.js';
-import { SCANNING } from '../../constants/bleManagerStatus.js';
+import { SCANNING, MISSING_BLE_PERMISSION } from '../../constants/bleManagerStatus.js';
 
 export const bleScan = () => {
   return (dispatch, getState, DeviceManager) => {
