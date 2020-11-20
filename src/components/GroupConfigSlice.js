@@ -46,7 +46,7 @@ function ConnectGroupConfigSlice(props) {
     let formattedString = formatCircuitText(value.nativeEvent.text);
     formattedString = formattedString.split(',');
 
-    // Turn ranges of numbers (ex. 10-20) into individual int's separated by commas.
+    // Turn ranges of numbers (ex. "10-12") into individual int's separated by commas (ex. "10,11,12").
     // Handle range of numbers from user input (ex. 20-45). Transformed into all numbers inbetween.
     // if (x.indexOf('-') > -1) {
     //   let circuitRangeString = x.split('-');
