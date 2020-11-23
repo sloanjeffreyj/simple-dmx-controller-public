@@ -14,6 +14,7 @@ export const startBleScan = () => {
           }
           else {
             dispatch(updateStatus(MISSING_BLE_PERMISSION));
+            return;
           }
         })
         .then(() => {

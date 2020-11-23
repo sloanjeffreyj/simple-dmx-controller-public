@@ -80,7 +80,7 @@ function ConnectGroupConfigSlice(props) {
     props.setGroupCircuits(groupInfo);
   }
 
-  // Format circuits for display
+  // Format circuits for display to user
   function formatCircuitText(circuits) {
     let unformattedCircuits = JSON.stringify(circuits);
     let formattedCircuits = unformattedCircuits.replace(/[^0-9,-]/g, '');
@@ -105,8 +105,8 @@ function ConnectGroupConfigSlice(props) {
           onSubmitEditing={(value) => handleCircuitChange(value)}
           defaultValue={formatCircuitText(props.circuits)}
           keyboardType={'numeric'}
+          multiline={true}
           returnKeyType={'done'}
-          selectTextOnFocus={true}
           value={displayCircuits}
           onChangeText={(value) => setDisplayCircuits(formatCircuitText(value))}
         />
@@ -128,6 +128,7 @@ function createStyle() {
       margin: 8,
     },
     circuitsContainer: {
+      alignItems: 'center',
       flex: 1,
       flexDirection: 'row',
     },

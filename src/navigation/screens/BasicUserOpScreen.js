@@ -14,8 +14,8 @@ import Animated from 'react-native-reanimated';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import IntensitySlider from '../../components/IntensitySlider.js';
-import IntensityFlatListSeperator from '../../components/IntensityFlatListSeperator.js';
 import ConnectionStatusBar from '../../components/ConnectionStatusBar.js';
+import RefreshBleButton from '../../components/RefreshBleButton.js';
 import { startBleScan } from '../../redux/thunk/startBleScan.js';
 import { connectDevice } from '../../redux/thunk/connectDevice.js';
 import { CONNECTED, SCANNING } from '../../constants/bleManagerStatus';
@@ -39,8 +39,6 @@ const mapDispatchToProps = (dispatch) => ({
 function BasicUserOpScreen(props) {
   const styles = createStyle();
   const [rowSwipeAnimatedValues, setRowSwipeAnimatedValues] = useState({});
-  const [listViewData, setListViewData] = useState();
-  const [sectionListData, setSectionListData] = useState();
 
   useEffect(() => {
     props.startBleScan();
@@ -103,6 +101,7 @@ function BasicUserOpScreen(props) {
 
   return (
     <View style={styles.container}>
+      <RefreshBleButton />
       <ConnectionStatusBar />
       <BleDevicesFlatList />
       <FlatList
