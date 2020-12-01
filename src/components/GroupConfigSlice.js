@@ -101,6 +101,8 @@ function ConnectGroupConfigSlice(props) {
       <View style={styles.circuitsContainer}>
         <Text style={styles.text}>Circuits: </Text>
         <TextInput
+          ellipsizeMode={'middle'}
+          numberOfLines={1}
           style={styles.textInput}
           onSubmitEditing={(value) => handleCircuitChange(value)}
           defaultValue={formatCircuitText(props.circuits)}
@@ -143,11 +145,13 @@ function createStyle() {
     },
     textInput: {
       color: colors.text,
+      flex: 1,
       fontSize: 18,
       backgroundColor: 'rgba(255, 165, 20, 0.2)',
       borderColor: colors.border,
       borderRadius: 10,
       borderWidth: 2,
+      margin: 2,
       paddingLeft: 4,
       paddingRight: 4,
       textAlign: 'center',
