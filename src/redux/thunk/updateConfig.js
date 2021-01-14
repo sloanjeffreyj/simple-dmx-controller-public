@@ -3,11 +3,11 @@ import { updateStatus } from '../actions/bleManagerActions.js';
 import { setGroupIntensity } from '../actions/setGroupIntensity.js';
 import {SERVICE_UUID, CHARACTERISTIC_OPERATION_UUID} from '../../constants/microControllerUuid.js'
 
-export const updateIntensity = (groupInfo) => {
+export const updateConfig = (groupInfo) => {
   return (dispatch, getState, DeviceManager) => {
     const state = getState();
     const groupInfoBase64 = charBase64.btoa(
-      groupInfo.intensity.toString() + ',' + groupInfo.circuits.toString()
+      groupInfo.id + ',' + groupInfo.nickname + ',' + groupInfo.circuits.toString()
     );
     try {
       let dmxControllerResponse = state.bleManager.connectedDevice.writeCharacteristicWithResponseForService(

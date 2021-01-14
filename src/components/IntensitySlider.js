@@ -74,7 +74,7 @@ function ConnectedIntensitySlider(props) {
         // onSlidingStart={(value) => setInitIntensity(value)}
         onValueChange={(value) => handleIntensityChange(value)}
         maximumTrackTintColor={'#C0C0C0'}
-        step={25.5}
+        step={2.55}
         style={styles.slider}
         value={props.intensity}
       />
