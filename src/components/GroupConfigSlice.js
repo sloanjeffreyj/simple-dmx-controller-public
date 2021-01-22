@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import setGroupNickname from '../redux/actions/setGroupNickname.js';
 import setGroupCircuits from '../redux/actions/setGroupCircuits.js';
 import selectDisplayName from '../helpers/selectDisplayName.js';
+import { RESTART_DEVICE_CODE, SET_CONFIG_CODE } from '../constants/actionTypes.js'
 
 function dispatchSetGroupConfig(dispatch) {
   return {
@@ -32,6 +33,7 @@ function ConnectGroupConfigSlice(props) {
   // Handles changing nickname
   function handleNicknameChange(value) {
     let groupInfo = {
+      operation: SET_CONFIG_CODE,
       id: props.id,
       circuits: props.circuits,
       intensity: props.intensity,

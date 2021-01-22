@@ -5,6 +5,7 @@ import Slider from '@react-native-community/slider';
 import { connect } from 'react-redux';
 
 import setGroupIntensity from '../redux/actions/setGroupIntensity.js';
+import { SET_INTENSITY_CODE } from '../constants/actionTypes.js'
 import { updateIntensity } from '../redux/thunk/updateIntensity.js';
 import selectDisplayName from '../helpers/selectDisplayName.js';
 
@@ -50,6 +51,7 @@ function ConnectedIntensitySlider(props) {
     //   .then(props.updateIntensity(groupInfo))
     // }
       let groupInfo = {
+        operation: SET_INTENSITY_CODE,
         id: props.id,
         circuits: props.circuits,
         intensity: newIntensity,
@@ -61,6 +63,8 @@ function ConnectedIntensitySlider(props) {
   if (props.nickname === '') {
     return null;
   }
+
+  console.log('About to load intensitySlider');
 
   return (
     <View style={styles.container}>

@@ -7,7 +7,7 @@ export const updateIntensity = (groupInfo) => {
   return (dispatch, getState, DeviceManager) => {
     const state = getState();
     const groupInfoBase64 = charBase64.btoa(
-      groupInfo.intensity.toString() + ',' + groupInfo.circuits.toString()
+      groupInfo.operation.toString() + ',' + groupInfo.id + ',' + groupInfo.intensity.toString() + ',' + groupInfo.circuits.toString()
     );
     try {
       let dmxControllerResponse = state.bleManager.connectedDevice.writeCharacteristicWithResponseForService(

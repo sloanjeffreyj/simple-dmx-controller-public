@@ -42,6 +42,7 @@ function BasicUserOpScreen(props) {
 
   useEffect(() => {
     props.startBleScan();
+    console.log('Started BLE scan.');
     Array(props.bleList.length)
       .fill('')
       .forEach((_, i) => {
@@ -56,6 +57,7 @@ function BasicUserOpScreen(props) {
   }
 
   function handleClick(device) {
+    console.log('Button has been clicked.');
     props.connectDevice(device);
   }
 
