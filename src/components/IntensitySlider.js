@@ -54,7 +54,7 @@ function ConnectedIntensitySlider(props) {
         operation: SET_INTENSITY_CODE,
         id: props.id,
         circuits: props.circuits,
-        intensity: newIntensity,
+        intensity: Math.round(newIntensity ),
         nickname: props.nickname,
       };
       props.updateIntensity(groupInfo);
@@ -78,7 +78,7 @@ function ConnectedIntensitySlider(props) {
         // onSlidingStart={(value) => setInitIntensity(value)}
         onValueChange={(value) => handleIntensityChange(value)}
         maximumTrackTintColor={'#C0C0C0'}
-        step={2.55}
+        step={12.75}
         style={styles.slider}
         value={props.intensity}
       />

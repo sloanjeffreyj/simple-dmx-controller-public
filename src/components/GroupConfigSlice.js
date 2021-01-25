@@ -11,11 +11,15 @@ import { connect } from 'react-redux';
 
 import setGroupNickname from '../redux/actions/setGroupNickname.js';
 import setGroupCircuits from '../redux/actions/setGroupCircuits.js';
+import setGroupConfig from '../redux/actions/setGroupConfig.js';
+import { updateGroupConfig } from '../redux/thunk/updateGroupConfig.js';
 import selectDisplayName from '../helpers/selectDisplayName.js';
 import { RESTART_DEVICE_CODE, SET_CONFIG_CODE } from '../constants/actionTypes.js'
 
 function dispatchSetGroupConfig(dispatch) {
   return {
+    setGroupConfig : (groupInfo) => dispatch(setGroupConfig(groupInfo)),
+    updateGroupConfig: (groupInfo) => dispatch(updateGroupConfig(groupInfo)),
     setGroupNickname: (groupInfo) => dispatch(setGroupNickname(groupInfo)),
     setGroupCircuits: (groupInfo) => dispatch(setGroupCircuits(groupInfo)),
   };
@@ -39,7 +43,7 @@ function ConnectGroupConfigSlice(props) {
       intensity: props.intensity,
       nickname: value.nativeEvent.text,
     };
-    props.setGroupNickname(groupInfo);
+    props.updateGroupConfig(groupInfo);
   }
 
   // Handles changing circuits

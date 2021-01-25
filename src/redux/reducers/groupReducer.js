@@ -3,6 +3,7 @@ import {
   SET_INTENSITY,
   SET_NICKNAME,
   SET_CIRCUITS,
+  SET_CONFIG,
 } from '../../constants/actionTypes.js';
 
 const initialState = {
@@ -25,7 +26,6 @@ export default function groupReducer(state = initialState, action) {
   switch (action.type) {
     case SET_INTENSITY:
       const newIntensityState = replaceGroupInfo(state, action);
-
       return Object.assign({}, state, {
         groups: newIntensityState,
       });
@@ -40,6 +40,12 @@ export default function groupReducer(state = initialState, action) {
       const newCircuitsState = replaceGroupInfo(state, action);
       return Object.assign({}, state, {
         groups: newCircuitsState,
+      });
+
+    case SET_CONFIG:
+      const newGroupConfig = replaceGroupInfo(state, action);
+      return Object.assign({}, state, {
+        groups: newGroupConfig,
       });
 
     default:

@@ -2,6 +2,7 @@
 export const SET_INTENSITY = 'SET_INTENSITY';
 export const SET_NICKNAME = 'SET_NICKNAME';
 export const SET_CIRCUITS = 'SET_CIRCUITS';
+export const SET_CONFIG = 'SET_CONFIG';
 
 // BLE Manager actions.
 export const SCAN_CONNECT_BLE = 'SCAN_CONNECT_BLE';
