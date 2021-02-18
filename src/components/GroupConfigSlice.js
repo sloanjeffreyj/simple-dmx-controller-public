@@ -15,6 +15,7 @@ import setGroupConfig from '../redux/actions/setGroupConfig.js';
 import { updateGroupConfig } from '../redux/thunk/updateGroupConfig.js';
 import selectDisplayName from '../helpers/selectDisplayName.js';
 import { RESTART_DEVICE_CODE, SET_CONFIG_CODE } from '../constants/actionTypes.js'
+import { MAX_CHANNELS } from '../constants/groups.js'
 
 function dispatchSetGroupConfig(dispatch) {
   return {
@@ -43,6 +44,8 @@ function ConnectGroupConfigSlice(props) {
       intensity: props.intensity,
       nickname: value.nativeEvent.text,
     };
+    props.setGroupNickname(groupInfo);
+    props.setGroupCircuits(groupInfo);
     props.updateGroupConfig(groupInfo);
   }
 
@@ -69,6 +72,11 @@ function ConnectGroupConfigSlice(props) {
       return parseInt(x, 10);
     });
 
+    // Fill rest of channels with 0's.
+    while (numArr.length < MAX_CHANNELS) {
+      numArr.push(0);
+    }
+
     // Filter out non numbers that slipped through.
     let circuitsPayload = numArr.filter((item) => {
       return !isNaN(item);
@@ -76,6 +84,7 @@ function ConnectGroupConfigSlice(props) {
 
     // Format payload
     let groupInfo = {
+      operation: SET_CONFIG_CODE,
       id: props.id,
       circuits: circuitsPayload,
       intensity: props.intensity,
@@ -84,12 +93,20 @@ function ConnectGroupConfigSlice(props) {
     setDisplayCircuits(formatCircuitText(circuitsPayload));
     console.log(groupInfo);
     props.setGroupCircuits(groupInfo);
+    props.updateGroupConfig(groupInfo);
   }
 
   // Format circuits for display to user
   function formatCircuitText(circuits) {
     let unformattedCircuits = JSON.stringify(circuits);
     let formattedCircuits = unformattedCircuits.replace(/[^0-9,-]/g, '');
+    return formattedCircuits;
+  }
+
+  function formatCircuitTextDisplay(circuits) {
+    let unformattedCircuits = JSON.stringify(circuits);
+    let semiFormattedCircuits = unformattedCircuits.replace(/[^0-9,-]/g, '');
+    let formattedCircuits = semiFormattedCircuits.replace(/,0/g, '');
     return formattedCircuits;
   }
 
@@ -111,11 +128,11 @@ function ConnectGroupConfigSlice(props) {
           numberOfLines={1}
           style={styles.textInput}
           onSubmitEditing={(value) => handleCircuitChange(value)}
-          defaultValue={formatCircuitText(props.circuits)}
+          defaultValue={formatCircuitTextDisplay(props.circuits)}
           keyboardType={'numeric'}
           multiline={true}
           returnKeyType={'done'}
-          value={displayCircuits}
+          value={formatCircuitTextDisplay(displayCircuits)}
           onChangeText={(value) => setDisplayCircuits(formatCircuitText(value))}
         />
       </View>

@@ -54,7 +54,7 @@ function ConnectedIntensitySlider(props) {
         operation: SET_INTENSITY_CODE,
         id: props.id,
         circuits: props.circuits,
-        intensity: Math.round(newIntensity ),
+        intensity: Math.round(newIntensity),
         nickname: props.nickname,
       };
       props.updateIntensity(groupInfo);
@@ -63,8 +63,6 @@ function ConnectedIntensitySlider(props) {
   if (props.nickname === '') {
     return null;
   }
-
-  console.log('About to load intensitySlider');
 
   return (
     <View style={styles.container}>

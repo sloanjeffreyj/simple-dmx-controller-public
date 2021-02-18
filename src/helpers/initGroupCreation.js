@@ -4,7 +4,8 @@ export default function initGroupCreation(numOfGroups) {
 
   while (x < numOfGroups) {
     groups[x] = {
-      id: 'group' + x,
+      operation: 0,
+      id: x.toString(),
       circuits: [],
       intensity: 0,
       nickname: '',
