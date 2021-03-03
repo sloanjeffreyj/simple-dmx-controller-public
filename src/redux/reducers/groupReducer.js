@@ -4,6 +4,7 @@ import {
   SET_NICKNAME,
   SET_CIRCUITS,
   SET_CONFIG,
+  READ_CONFIG,
 } from '../../constants/actionTypes.js';
 
 const initialState = {
@@ -48,6 +49,8 @@ export default function groupReducer(state = initialState, action) {
         groups: newGroupConfig,
       });
 
+    case READ_CONFIG:
+      console.log(state);
     default:
       return state;
   }

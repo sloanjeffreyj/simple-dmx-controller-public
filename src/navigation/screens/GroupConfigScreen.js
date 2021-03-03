@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import GroupConfigSlice from '../../components/GroupConfigSlice.js';
+import readDeviceConfig from '../../redux/thunk/readDeviceConfig.js';
 
 function selectGroups(state) {
   return {

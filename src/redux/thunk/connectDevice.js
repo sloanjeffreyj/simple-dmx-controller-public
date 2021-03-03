@@ -1,5 +1,6 @@
 import { onDeviceDisconnect } from './onDeviceDisconnect.js';
 import { startBleScan } from './startBleScan.js';
+import { readDeviceConfig } from './readDeviceConfig.js';
 import { updateStatus, connectedDevice, clearBleList } from '../actions/bleManagerActions.js';
 import { CONNECTING, DISCOVERING, SETTING_NOTIFICATIONS, LISTENING, SCANNING } from '../../constants/bleManagerStatus.js'
 
@@ -22,6 +23,7 @@ export const connectDevice = (device) => {
         (device) => {
           dispatch(updateStatus(LISTENING));
           dispatch(connectedDevice(device));
+          dispatch(readDeviceConfig());
           dispatch(onDeviceDisconnect(device));
           return device;
         },

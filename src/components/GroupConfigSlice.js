@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import setGroupNickname from '../redux/actions/setGroupNickname.js';
 import setGroupCircuits from '../redux/actions/setGroupCircuits.js';
 import setGroupConfig from '../redux/actions/setGroupConfig.js';
+import { readDeviceConfig } from '../redux/thunk/readDeviceConfig.js';
 import { updateGroupConfig } from '../redux/thunk/updateGroupConfig.js';
 import selectDisplayName from '../helpers/selectDisplayName.js';
 import { RESTART_DEVICE_CODE, SET_CONFIG_CODE } from '../constants/actionTypes.js'
@@ -23,6 +24,7 @@ function dispatchSetGroupConfig(dispatch) {
     updateGroupConfig: (groupInfo) => dispatch(updateGroupConfig(groupInfo)),
     setGroupNickname: (groupInfo) => dispatch(setGroupNickname(groupInfo)),
     setGroupCircuits: (groupInfo) => dispatch(setGroupCircuits(groupInfo)),
+    readDeviceConfig: (groupInfo) => dispatch(readDeviceConfig(groupInfo)),
   };
 }
 
@@ -35,6 +37,17 @@ function ConnectGroupConfigSlice(props) {
     selectDisplayName(props.nickname)
   );
 
+    useEffect(() => {
+      let groupInfo = {
+        operation: SET_CONFIG_CODE,
+        id: props.id,
+        circuits: props.circuits,
+        intensity: props.intensity,
+        nickname: props.nickname,
+      };  
+      props.readDeviceConfig(groupInfo)
+    }, [])
+
   // Handles changing nickname
   function handleNicknameChange(value) {
     let groupInfo = {
@@ -44,9 +57,7 @@ function ConnectGroupConfigSlice(props) {
       intensity: props.intensity,
       nickname: value.nativeEvent.text,
     };
-    props.setGroupNickname(groupInfo);
-    props.setGroupCircuits(groupInfo);
-    props.updateGroupConfig(groupInfo);
+    props.readDeviceConfig(groupInfo);
   }
 
   // Handles changing circuits
@@ -87,7 +98,7 @@ function ConnectGroupConfigSlice(props) {
       operation: SET_CONFIG_CODE,
       id: props.id,
       circuits: circuitsPayload,
-      intensity: props.intensity,
+      intensity: 10,
       nickname: props.nickname,
     };
     setDisplayCircuits(formatCircuitText(circuitsPayload));
