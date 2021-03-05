@@ -11,13 +11,13 @@ export const readDeviceConfig = () => {
         CHARACTERISTIC_INFO_UUID
       )
       dmxControllerResponse.then(() => {
-        console.log("Read value from CHARACTERISTIC_INFO_UUID: ");
+        console.log(dmxControllerResponse);
         let printValue = charBase64.atob(dmxControllerResponse._55.value);
-        console.log(printValue);
+        console.log("Read value from CHARACTERISTIC_INFO_UUID: ", printValue);
       });
       return true;
     } catch (error) {
-      console.log('Update Error: ', error);
+      console.log('readDeviceConfig Error: ', error);
       return false;
     }
   };

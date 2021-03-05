@@ -18,7 +18,7 @@ export const updateIntensity = (groupInfo) => {
       dispatch(setGroupIntensity(groupInfo));
       return true;
     } catch (error) {
-      console.log('Update Error: ', error);
+      console.log('Update Intensity Error: ', error);
       return false;
     }
   };

@@ -57,6 +57,9 @@ function ConnectGroupConfigSlice(props) {
       intensity: props.intensity,
       nickname: value.nativeEvent.text,
     };
+    props.setGroupNickname(groupInfo);
+    props.setGroupCircuits(groupInfo);
+    props.updateGroupConfig(groupInfo);
     props.readDeviceConfig(groupInfo);
   }
 
