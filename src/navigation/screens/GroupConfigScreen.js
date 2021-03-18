@@ -24,6 +24,8 @@ function selectGroups(state) {
 function GroupConfigScreen({ groups }) {
   const styles = createStyle();
 
+  
+
   function renderGroupSlices({ item }) {
     return (
       <GroupConfigSlice
