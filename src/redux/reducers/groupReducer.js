@@ -3,8 +3,8 @@ import {
   SET_INTENSITY,
   SET_NICKNAME,
   SET_CIRCUITS,
-  SET_CONFIG,
-  READ_CONFIG,
+  SET_GROUP_CONFIG,
+  READ_GROUP_CONFIG,
 } from '../../constants/actionTypes.js';
 
 const initialState = {
@@ -43,14 +43,18 @@ export default function groupReducer(state = initialState, action) {
         groups: newCircuitsState,
       });
 
-    case SET_CONFIG:
+    case SET_GROUP_CONFIG:
       const newGroupConfig = replaceGroupInfo(state, action);
       return Object.assign({}, state, {
         groups: newGroupConfig,
       });
 
-    case READ_CONFIG:
-      console.log(state);
+    case READ_GROUP_CONFIG:
+      const readGroupConfig = replaceGroupInfo(state, action);
+      return Object.assign({}, state, {
+        groups: readGroupConfig,
+      });
+
     default:
       return state;
   }

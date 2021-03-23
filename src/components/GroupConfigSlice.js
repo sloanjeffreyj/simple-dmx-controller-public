@@ -24,7 +24,6 @@ function dispatchSetGroupConfig(dispatch) {
     updateGroupConfig: (groupInfo) => dispatch(updateGroupConfig(groupInfo)),
     setGroupNickname: (groupInfo) => dispatch(setGroupNickname(groupInfo)),
     setGroupCircuits: (groupInfo) => dispatch(setGroupCircuits(groupInfo)),
-    readDeviceConfig: (groupInfo) => dispatch(readDeviceConfig(groupInfo)),
   };
 }
 
@@ -36,17 +35,6 @@ function ConnectGroupConfigSlice(props) {
   const [displayName, setDisplayName] = useState(
     selectDisplayName(props.nickname)
   );
-
-    useEffect(() => {
-      let groupInfo = {
-        operation: SET_CONFIG_CODE,
-        id: props.id,
-        circuits: props.circuits,
-        intensity: props.intensity,
-        nickname: props.nickname,
-      };  
-      props.readDeviceConfig(groupInfo)
-    }, [])
 
   // Handles changing nickname
   function handleNicknameChange(value) {
@@ -60,7 +48,6 @@ function ConnectGroupConfigSlice(props) {
     props.setGroupNickname(groupInfo);
     props.setGroupCircuits(groupInfo);
     props.updateGroupConfig(groupInfo);
-    props.readDeviceConfig(groupInfo);
   }
 
   // Handles changing circuits
@@ -130,7 +117,7 @@ function ConnectGroupConfigSlice(props) {
         <Text style={styles.text}>Group: </Text>
         <TextInput
           style={styles.textInput}
-          defaultValue={selectDisplayName(props.nickname, props.id)}
+          defaultValue={selectDisplayName(props.nickname, props.id).toString()}
           onSubmitEditing={(value) => handleNicknameChange(value)}
           selectTextonFocus={true}
         />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -12,19 +12,17 @@ import { connect } from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import GroupConfigSlice from '../../components/GroupConfigSlice.js';
-import readDeviceConfig from '../../redux/thunk/readDeviceConfig.js';
+import { readDeviceConfig } from '../../redux/thunk/readDeviceConfig.js';
 
-function selectGroups(state) {
+function mapStateToProps(state) {
   return {
     groups: state.groups.groups,
   };
 }
 
 // Config groups of circuits and their names.
-function GroupConfigScreen({ groups }) {
+function GroupConfigScreen(props) {
   const styles = createStyle();
-
-  
 
   function renderGroupSlices({ item }) {
     return (
@@ -41,7 +39,7 @@ function GroupConfigScreen({ groups }) {
     <View style={styles.container}>
       <Text style={styles.text}>Config - Separate Circuits with Commas</Text>
       <FlatList
-        data={groups}
+        data={props.groups}
         renderItem={renderGroupSlices}
         keyExtractor={(item) => item.id}
       />
@@ -65,6 +63,6 @@ function createStyle() {
   return styles;
 }
 
-const ConnectedGroupConfigScreen = connect(selectGroups)(GroupConfigScreen);
+const ConnectedGroupConfigScreen = connect(mapStateToProps)(GroupConfigScreen);
 
 export default ConnectedGroupConfigScreen;
