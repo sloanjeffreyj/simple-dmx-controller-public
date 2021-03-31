@@ -1,5 +1,5 @@
 import { SERVICE_UUID, CHARACTERISTIC_INFO_UUID } from '../../constants/microControllerUuid.js';
-import { setGroupConfig } from '../actions/setGroupConfig';
+import { setGroupConfig } from '../actions/setGroupConfig.js';
 import charBase64 from '../../helpers/charBase64.js';
 import { 
   group, 
@@ -14,17 +14,16 @@ import {
 export const readDeviceConfig = () => {
   return (dispatch, getState, DeviceManager) => {
     const state = getState();
-    for (i = 0; i < MAX_GROUPS; i++) {
+    for (let i = 0; i < MAX_GROUPS; i++) {
       try {
         let dmxControllerResponse = state.bleManager.connectedDevice.readCharacteristicForService(
           SERVICE_UUID,
           CHARACTERISTIC_INFO_UUID
         )
         dmxControllerResponse.then(() => {
-          console.log(dmxControllerResponse);
           let responseValue = charBase64.atob(dmxControllerResponse._55.value);
           let rawArray = responseValue.split(',');
-          console.log('rawArray: ' + rawArray);
+          // console.log('rawArray: ' + rawArray);
           // Position subtracted by 1 due to no operation being sent with data.
           let newNickname = '';
           if (rawArray[NICKNAME_POSITION - 1]) {
@@ -39,11 +38,13 @@ export const readDeviceConfig = () => {
             circuits: [],
           };
 
-          for (i = 0; i < MAX_CHANNELS; i++) {
-            newGroup.circuits[i] = Number(rawArray[CHANNEL_START_POSITION + i - 1]);
-          }
-          dispatch(setGroupConfig(newGroup))
-          console.log("Read value from CHARACTERISTIC_INFO_UUID: ", newGroup);
+          let newCircuits = [MAX_CHANNELS];
+          for (let j = 0; j < MAX_CHANNELS; j++) {
+            newCircuits[j] = Number(rawArray[CHANNEL_START_POSITION + j - 1]);
+          };
+          newGroup.circuits = newCircuits;
+          dispatch(setGroupConfig(newGroup));
+          // console.log("Read value from CHARACTERISTIC_INFO_UUID: ", newGroup.circuits);
         });
         // return true;
       } catch (error) {

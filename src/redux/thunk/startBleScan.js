@@ -1,5 +1,5 @@
 import { bleScan } from './bleScan.js';
-import { updateStatus } from '../actions/bleManagerActions.js';
+import { updateStatus, clearBleList } from '../actions/bleManagerActions.js';
 import { INITIALIZED, MISSING_BLE_PERMISSION } from '../../constants/bleManagerStatus.js';
 import { requestBlePermission } from '../../helpers/requestBlePermission.js';
 
@@ -11,6 +11,7 @@ export const startBleScan = () => {
         .then(() => {
           if (blePermissionGranted) {
             dispatch(updateStatus(INITIALIZED));
+            dispatch(clearBleList());
           }
           else {
             dispatch(updateStatus(MISSING_BLE_PERMISSION));

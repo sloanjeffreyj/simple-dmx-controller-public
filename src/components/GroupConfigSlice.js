@@ -12,7 +12,6 @@ import { connect } from 'react-redux';
 import setGroupNickname from '../redux/actions/setGroupNickname.js';
 import setGroupCircuits from '../redux/actions/setGroupCircuits.js';
 import setGroupConfig from '../redux/actions/setGroupConfig.js';
-import { readDeviceConfig } from '../redux/thunk/readDeviceConfig.js';
 import { updateGroupConfig } from '../redux/thunk/updateGroupConfig.js';
 import selectDisplayName from '../helpers/selectDisplayName.js';
 import { RESTART_DEVICE_CODE, SET_CONFIG_CODE } from '../constants/actionTypes.js'
@@ -46,7 +45,6 @@ function ConnectGroupConfigSlice(props) {
       nickname: value.nativeEvent.text,
     };
     props.setGroupNickname(groupInfo);
-    props.setGroupCircuits(groupInfo);
     props.updateGroupConfig(groupInfo);
   }
 
@@ -119,7 +117,8 @@ function ConnectGroupConfigSlice(props) {
           style={styles.textInput}
           defaultValue={selectDisplayName(props.nickname, props.id).toString()}
           onSubmitEditing={(value) => handleNicknameChange(value)}
-          selectTextonFocus={true}
+          multiline={true}
+          selectTextOnFocus={true}
         />
       </View>
       <View style={styles.circuitsContainer}>
@@ -129,11 +128,10 @@ function ConnectGroupConfigSlice(props) {
           numberOfLines={1}
           style={styles.textInput}
           onSubmitEditing={(value) => handleCircuitChange(value)}
-          defaultValue={formatCircuitTextDisplay(props.circuits)}
+          defaultValue={formatCircuitTextDisplay(JSON.stringify(props.circuits))}
           keyboardType={'numeric'}
           multiline={true}
           returnKeyType={'done'}
-          value={formatCircuitTextDisplay(displayCircuits)}
           onChangeText={(value) => setDisplayCircuits(formatCircuitText(value))}
         />
       </View>
@@ -149,7 +147,7 @@ function createStyle() {
       borderRadius: 20,
       justifyContent: 'space-around',
       width: 380,
-      height: 90,
+      height: 110,
       paddingLeft: 8,
       margin: 8,
     },
@@ -157,11 +155,16 @@ function createStyle() {
       alignItems: 'center',
       flex: 1,
       flexDirection: 'row',
+      marginTop: 2,
+      marginBottom: 2,
     },
     groupNameContainer: {
       alignItems: 'center',
       flex: 1,
       flexDirection: 'row',
+      marginBottom: 2,
+      marginLeft: 12,
+      marginTop: 2,
     },
     text: {
       color: colors.text,

@@ -5,14 +5,15 @@ import {
   View,
   Button,
   FlatList,
+  KeyboardAvoidingView,
   StatusBar,
+  Platform,
 } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { connect } from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import GroupConfigSlice from '../../components/GroupConfigSlice.js';
-import { readDeviceConfig } from '../../redux/thunk/readDeviceConfig.js';
 
 function mapStateToProps(state) {
   return {
@@ -36,14 +37,20 @@ function GroupConfigScreen(props) {
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Config - Separate Circuits with Commas</Text>
-      <FlatList
-        data={props.groups}
-        renderItem={renderGroupSlices}
-        keyExtractor={(item) => item.id}
-      />
-    </View>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={{flex: 1}}
+    >
+      <View style={styles.container}>
+        <Text style={styles.text}>Config - Separate Circuits with Commas</Text>
+        <FlatList
+          data={props.groups}
+          renderItem={renderGroupSlices}
+          keyExtractor={(item) => item.id}
+          removeClippedSubviews={false}
+        />
+      </View>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -58,6 +65,9 @@ function createStyle() {
     text: {
       color: colors.text,
       fontSize: 18,
+    },
+    title: {
+      
     },
   });
   return styles;
