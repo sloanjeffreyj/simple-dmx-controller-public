@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {
+  Animated,
   Dimensions,
+  Easing,
   FlatList,
   StatusBar,
   StyleSheet,
@@ -11,7 +13,7 @@ import {
 import { useTheme, useNavigation } from '@react-navigation/native';
 import { connect } from 'react-redux';
 import Animated from 'react-native-reanimated';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity, PanGestureHandler } from 'react-native-gesture-handler';
 
 import IntensitySlider from '../../components/IntensitySlider.js';
 import ConnectionStatusBar from '../../components/ConnectionStatusBar.js';
@@ -50,14 +52,13 @@ function BasicUserOpScreen(props) {
       });
   }, []);
 
-  function closeRow(rowMap, rowKey) {
-    if (rowMap[rowKey]) {
-      rowMap[rowKey].closeRow();
-    }
-  }
+  // function closeRow(rowMap, rowKey) {
+  //   if (rowMap[rowKey]) {
+  //     rowMap[rowKey].closeRow();
+  //   }
+  // }
 
   function handleClick(device) {
-    console.log('Button has been clicked.');
     props.connectDevice(device);
   }
 
@@ -102,16 +103,21 @@ function BasicUserOpScreen(props) {
   }
 
   return (
-    <View style={styles.container}>
-      <RefreshBleButton />
-      <ConnectionStatusBar />
-      <BleDevicesFlatList />
-      <FlatList
-        data={props.groups}
-        keyExtractor={(item) => item.id}
-        renderItem={renderGroupList}
-      />
-    </View>
+    <PanGestureHandler
+      minDist={40}
+      onGestureEvent={() => props.navigation.navigate('Config')}
+    >
+      <View style={styles.container}>
+        <RefreshBleButton />
+        <ConnectionStatusBar />
+        <BleDevicesFlatList />
+        <FlatList
+          data={props.groups}
+          keyExtractor={(item) => item.id}
+          renderItem={renderGroupList}
+        />
+        </View>
+      </PanGestureHandler>
   );
 }
 
@@ -120,6 +126,7 @@ function createStyle() {
   const styles = StyleSheet.create({
     container: {
       alignContent: 'center',
+      flex: 1,
       margin: '3%',
     },
     text: {
