@@ -12,6 +12,7 @@ import {
 import { useTheme } from '@react-navigation/native';
 import { connect } from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
+import { PanGestureHandler } from 'react-native-gesture-handler';
 
 import GroupConfigSlice from '../../components/GroupConfigSlice.js';
 
@@ -37,20 +38,25 @@ function GroupConfigScreen(props) {
   }
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={{flex: 1}}
+    <PanGestureHandler
+      minDist={40}
+      onGestureEvent={() => props.navigation.navigate('Config')}
     >
-      <View style={styles.container}>
-        <Text style={styles.text}>Config - Separate Circuits with Commas</Text>
-        <FlatList
-          data={props.groups}
-          renderItem={renderGroupSlices}
-          keyExtractor={(item) => item.id}
-          removeClippedSubviews={false}
-        />
-      </View>
-    </KeyboardAvoidingView>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={{flex: 1}}
+      >
+        <View style={styles.container}>
+          <Text style={styles.text}>Config - Separate Circuits with Commas</Text>
+          <FlatList
+            data={props.groups}
+            renderItem={renderGroupSlices}
+            keyExtractor={(item) => item.id}
+            removeClippedSubviews={false}
+          />
+        </View>
+        </KeyboardAvoidingView>
+      </PanGestureHandler>
   );
 }
 
@@ -61,6 +67,9 @@ function createStyle() {
       flex: 1,
       alignItems: 'center',
       marginTop: StatusBar.currentHeight,
+    },
+    flatList: {
+      width: '95%',
     },
     text: {
       color: colors.text,

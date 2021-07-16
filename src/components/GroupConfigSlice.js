@@ -155,6 +155,7 @@ function createStyle() {
       alignItems: 'center',
       flex: 1,
       flexDirection: 'row',
+      marginRight: 4,
       marginTop: 2,
       marginBottom: 2,
     },
@@ -164,6 +165,7 @@ function createStyle() {
       flexDirection: 'row',
       marginBottom: 2,
       marginLeft: 12,
+      marginRight: 4,
       marginTop: 2,
     },
     text: {

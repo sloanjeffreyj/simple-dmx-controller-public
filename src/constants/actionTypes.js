@@ -13,5 +13,6 @@ export const CLEAR_BLE_LIST = 'CLEAR_BLE_LIST';
 
 // Microcontroller Actions.
 export const RESTART_DEVICE_CODE = 0;
+export const POWER_OFF_CODE = 1;
 export const SET_INTENSITY_CODE = 10;
 export const SET_CONFIG_CODE = 11;
