@@ -15,6 +15,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 
 import GroupConfigSlice from '../../components/GroupConfigSlice.js';
+import StatusBarBackground from '../../components/StatusBarBackground.js'
 
 function mapStateToProps(state) {
   return {
@@ -43,10 +44,11 @@ function GroupConfigScreen(props) {
       onGestureEvent={() => props.navigation.navigate('Config')}
     >
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        behavior={Platform.OS === 'ios' ? 18 : 0}
         style={{flex: 1}}
       >
         <View style={styles.container}>
+          <StatusBarBackground />
           <Text style={styles.text}>Config - Separate Circuits with Commas</Text>
           <FlatList
             data={props.groups}
@@ -66,7 +68,7 @@ function createStyle() {
     container: {
       flex: 1,
       alignItems: 'center',
-      marginTop: StatusBar.currentHeight,
+      marginTop: (Platform.OS === 'ios') ? 18 : StatusBar.currentHeight,
     },
     flatList: {
       width: '95%',

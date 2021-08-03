@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Animated,
   Dimensions,
   Easing,
   FlatList,
@@ -21,6 +20,7 @@ import RefreshBleButton from '../../components/RefreshBleButton.js';
 import { startBleScan } from '../../redux/thunk/startBleScan.js';
 import { connectDevice } from '../../redux/thunk/connectDevice.js';
 import { CONNECTED, SCANNING } from '../../constants/bleManagerStatus';
+import StatusBarBackground from '../../components/StatusBarBackground.js';
 
 // Connect Redux state.
 function mapStateToProps(state) {
@@ -108,6 +108,7 @@ function BasicUserOpScreen(props) {
       onGestureEvent={() => props.navigation.navigate('Config')}
     >
       <View style={styles.container}>
+      <StatusBarBackground />
         <RefreshBleButton />
         <ConnectionStatusBar />
         <BleDevicesFlatList />
@@ -129,6 +130,7 @@ function createStyle() {
       flex: 1,
       margin: '3%',
     },
+    
     text: {
       color: colors.text,
     },
