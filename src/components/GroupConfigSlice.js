@@ -117,7 +117,7 @@ function ConnectGroupConfigSlice(props) {
           style={styles.textInput}
           defaultValue={selectDisplayName(props.nickname, props.id).toString()}
           onSubmitEditing={(value) => handleNicknameChange(value)}
-          multiline={true}
+          returnKeyType={'done'}
           selectTextOnFocus={true}
         />
       </View>

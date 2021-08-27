@@ -15,7 +15,6 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 
 import GroupConfigSlice from '../../components/GroupConfigSlice.js';
-import StatusBarBackground from '../../components/StatusBarBackground.js'
 
 function mapStateToProps(state) {
   return {
@@ -48,7 +47,6 @@ function GroupConfigScreen(props) {
         style={{flex: 1}}
       >
         <View style={styles.container}>
-          <StatusBarBackground />
           <Text style={styles.text}>Config - Separate Circuits with Commas</Text>
           <FlatList
             data={props.groups}

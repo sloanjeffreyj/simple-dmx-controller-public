@@ -6,4 +6,5 @@ export const DISCOVERING = 'Discovering...';
 export const LOADING = 'Loading...';
 export const LISTENING = 'Listening...';
 export const SETTING_NOTIFICATIONS = 'Setting notifications...';
-export const MISSING_BLE_PERMISSION = 'Missing Bluetooth Permissions - Cannot Continue';
+export const MISSING_BLE_PERMISSION = 'Missing Bluetooth Permissions';
+export const BLE_ERROR = 'BLE Error';

@@ -10,6 +10,7 @@ export const SCAN_CONNECT_BLE = 'SCAN_CONNECT_BLE';
 export const CONNECTED_DEVICE = 'CONNECTED_DEVICE';
 export const UPDATE_STATUS = 'UPDATE_STATUS';
 export const CLEAR_BLE_LIST = 'CLEAR_BLE_LIST';
+export const PRINT_CONSOLE = 'PRINT_CONSOLE';
 
 // Microcontroller Actions.
 export const RESTART_DEVICE_CODE = 0;

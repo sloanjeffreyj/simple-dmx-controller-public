@@ -1,10 +1,9 @@
-import { BleManager } from 'react-native-ble-plx';
-
 import {
   SCAN_CONNECT_BLE,
   CONNECTED_DEVICE,
   UPDATE_STATUS,
-  CLEAR_BLE_LIST
+  CLEAR_BLE_LIST,
+  PRINT_CONSOLE,
 } from '../../constants/actionTypes.js';
 import { CONNECTED } from '../../constants/bleManagerStatus.js';
 import { requestBlePermission } from '../../helpers/requestBlePermission.js';
@@ -13,6 +12,7 @@ const initialState = {
   bleList: [],
   connectedDevice: {},
   status: 'disconnected',
+  console: '',
 };
 
 // export async function scanAndConnectBle(state) {
@@ -78,6 +78,7 @@ export default function bleManagerReducer(state = initialState, action) {
       else {
         const newBle = [...state.bleList, action.device];
         return {
+          ...state,
           bleList: newBle,
           connectedDevice: state.connectedDevice,
           status: action.status,
@@ -86,6 +87,7 @@ export default function bleManagerReducer(state = initialState, action) {
 
     case CONNECTED_DEVICE:
       return {
+        ...state,
         bleList: state.bleList,
         connectedDevice: action.connectedDevice,
         status: CONNECTED,
@@ -96,6 +98,7 @@ export default function bleManagerReducer(state = initialState, action) {
         return state;
       }
       return {
+        ...state,
         bleList: state.bleList,
         connectedDevice: action.connectedDevice,
         status: action.status,
@@ -103,10 +106,17 @@ export default function bleManagerReducer(state = initialState, action) {
 
     case CLEAR_BLE_LIST:
       return {
+        ...state,
         bleList: [],
         connectedDevice: {},
-        status: state.status
+        status: state.status,
       }
+
+      case PRINT_CONSOLE:
+        return {
+          ...state,
+          console: action.payload,
+        }
 
     default:
       return state;

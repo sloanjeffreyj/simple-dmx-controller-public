@@ -21,7 +21,7 @@ export const readDeviceConfig = () => {
           CHARACTERISTIC_INFO_UUID
         )
         dmxControllerResponse.then(() => {
-          let responseValue = charBase64.atob(dmxControllerResponse._55.value);
+          let responseValue = charBase64.atob(dmxControllerResponse._W.value);
           let rawArray = responseValue.split(',');
           // console.log('rawArray: ' + rawArray);
           // Position subtracted by 1 due to no operation being sent with data.

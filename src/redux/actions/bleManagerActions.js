@@ -2,7 +2,8 @@ import {
   SCAN_CONNECT_BLE,
   CONNECTED_DEVICE,
   UPDATE_STATUS,
-  CLEAR_BLE_LIST
+  CLEAR_BLE_LIST,
+  PRINT_CONSOLE,
 } from '../../constants/actionTypes.js';
 
 export const scanConnectBle = (device) => {
@@ -30,4 +31,11 @@ export const clearBleList = () => {
   return {
     type: CLEAR_BLE_LIST
   };
+}
+
+export const printConsole = (console) => {
+  return {
+    type: PRINT_CONSOLE,
+    payload: console
+  }
 }

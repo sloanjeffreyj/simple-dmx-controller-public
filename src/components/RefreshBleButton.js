@@ -6,6 +6,8 @@ import { useTheme } from '@react-navigation/native';
 import { connect }  from 'react-redux';
 
 import { startBleScan } from '../redux/thunk/startBleScan.js';
+import { disconnectBleDevice } from '../redux/thunk/disconnectBleDevice.js';
+import { printConsole } from '../redux/actions/bleManagerActions.js';
 
 // Connect to Redux for props
 function mapStateToProps(state) {
@@ -18,6 +20,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     startBleScan: () => dispatch(startBleScan()),
+    disconnectBleDevice: () => dispatch(disconnectBleDevice()),
+    printConsole: (console) => dispatch(printConsole(console)),
   };
 }
 

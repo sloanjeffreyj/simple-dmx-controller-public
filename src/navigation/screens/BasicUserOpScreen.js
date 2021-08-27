@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Dimensions,
-  Easing,
   FlatList,
   StatusBar,
   StyleSheet,
@@ -20,7 +18,6 @@ import RefreshBleButton from '../../components/RefreshBleButton.js';
 import { startBleScan } from '../../redux/thunk/startBleScan.js';
 import { connectDevice } from '../../redux/thunk/connectDevice.js';
 import { CONNECTED, SCANNING } from '../../constants/bleManagerStatus';
-import StatusBarBackground from '../../components/StatusBarBackground.js';
 
 // Connect Redux state.
 function mapStateToProps(state) {
@@ -40,16 +37,10 @@ const mapDispatchToProps = (dispatch) => ({
 // The "home" type screen where typical users control intensity of circuit groups.
 function BasicUserOpScreen(props) {
   const styles = createStyle();
-  const [rowSwipeAnimatedValues, setRowSwipeAnimatedValues] = useState({});
 
   useEffect(() => {
     props.startBleScan();
     console.log('Started BLE scan.');
-    Array(props.bleList.length)
-      .fill('')
-      .forEach((_, i) => {
-        rowSwipeAnimatedValues[`${i}`] = new Animated.Value(0);
-      });
   }, []);
 
   // function closeRow(rowMap, rowKey) {
@@ -103,12 +94,11 @@ function BasicUserOpScreen(props) {
   }
 
   return (
-    <PanGestureHandler
-      minDist={40}
-      onGestureEvent={() => props.navigation.navigate('Config')}
-    >
+    // <PanGestureHandler
+    //   minDist={40}
+    //   onGestureEvent={() => props.navigation.navigate('Config')}
+    // >
       <View style={styles.container}>
-      <StatusBarBackground />
         <RefreshBleButton />
         <ConnectionStatusBar />
         <BleDevicesFlatList />
@@ -118,7 +108,7 @@ function BasicUserOpScreen(props) {
           renderItem={renderGroupList}
         />
         </View>
-      </PanGestureHandler>
+      // </PanGestureHandler>
   );
 }
 
