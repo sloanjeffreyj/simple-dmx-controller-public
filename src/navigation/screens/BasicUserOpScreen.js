@@ -119,6 +119,7 @@ function createStyle() {
       alignContent: 'center',
       flex: 1,
       margin: '3%',
+      marginTop: 4,
     },
     
     text: {

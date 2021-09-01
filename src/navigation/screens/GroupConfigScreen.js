@@ -43,11 +43,12 @@ function GroupConfigScreen(props) {
       onGestureEvent={() => props.navigation.navigate('Config')}
     >
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 18 : 0}
+        // This line may be redundant? Haven't checked the iOS version yet.
+        // behavior={Platform.OS === 'ios' ? 18 : 0}
         style={{flex: 1}}
       >
         <View style={styles.container}>
-          <Text style={styles.text}>Config - Separate Circuits with Commas</Text>
+          <Text style={styles.title}>Config - Separate Circuits with Commas</Text>
           <FlatList
             data={props.groups}
             renderItem={renderGroupSlices}
@@ -66,17 +67,15 @@ function createStyle() {
     container: {
       flex: 1,
       alignItems: 'center',
-      marginTop: (Platform.OS === 'ios') ? 18 : StatusBar.currentHeight,
+      marginTop: (Platform.OS === 'ios') ? 18 : 2,
     },
     flatList: {
       width: '95%',
     },
-    text: {
+    title: {
       color: colors.text,
       fontSize: 18,
-    },
-    title: {
-      
+      marginBottom: 4,
     },
   });
   return styles;

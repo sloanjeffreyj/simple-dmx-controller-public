@@ -28,12 +28,10 @@ function ConnectionStatusBar(props) {
 function createStyle() {
   const { colors } = useTheme();
   const styles = StyleSheet.create({
-    console: {
-      color: colors.text,
-    },
     statusContainer: {
       alignItems: 'center',
       justifyContent: 'center',
+      marginBottom: 6,
     },
     status: {
       backgroundColor: 'rgba(251, 253, 0, 0.5)',
