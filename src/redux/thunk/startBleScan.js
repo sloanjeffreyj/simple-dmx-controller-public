@@ -30,15 +30,8 @@ export const startBleScan = () => {
         else {
           const blePermissionGranted = requestBlePermission()
           .then(() => {
-            if (blePermissionGranted) {
-              dispatch(updateStatus(INITIALIZED));
-              dispatch(clearBleList());
-            }
-            else {
-              dispatch(updateStatus(MISSING_BLE_PERMISSION));
-            }
-          })
-          .then(() => {
+            dispatch(updateStatus(INITIALIZED));
+            dispatch(clearBleList());
             dispatch(bleScan())
             subscription.remove();
           })
