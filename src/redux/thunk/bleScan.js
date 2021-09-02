@@ -4,6 +4,8 @@ import { connectDevice } from '../../redux/thunk/connectDevice.js';
 
 export const bleScan = () => {
   return (dispatch, getState, DeviceManager) => {
+    // If scan already happens to be in progress, stop it before starting it again.
+    DeviceManager.stopDeviceScan();
     DeviceManager.startDeviceScan(null, null, (error, device) => {
       if (error) {
         dispatch(updateStatus(BLE_ERROR));
@@ -14,10 +16,10 @@ export const bleScan = () => {
         dispatch(updateStatus(SCANNING));
         dispatch(scanConnectBle(device));
       }
-      // Automatically connect to hardware with the controllers name.
-      if (device.name === 'MVHS DMX') {
+      // Automatically connect to hardware with the controllers name. Also checks if device has name.
+      if (device.name && device.name === 'MVHS DMX') {
         dispatch(connectDevice(device));
-      }
+      };
     });
   };
 };

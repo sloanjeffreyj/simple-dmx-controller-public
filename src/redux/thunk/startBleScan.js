@@ -21,16 +21,9 @@ export const startBleScan = () => {
             }
           )
           .then(() => {
-            if (blePermissionGranted === PermissionsAndroid.RESULTS.GRANTED) {
-              dispatch(updateStatus(INITIALIZED));
-              dispatch(clearBleList());
-            }
-            else {
-              dispatch(updateStatus(MISSING_BLE_PERMISSION));
-            }
-          })
-          .then(() => {
-            dispatch(bleScan())
+            dispatch(updateStatus(INITIALIZED));
+            dispatch(clearBleList());
+            dispatch(bleScan());
             subscription.remove();
           })
         }

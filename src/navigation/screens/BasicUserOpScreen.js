@@ -40,7 +40,6 @@ function BasicUserOpScreen(props) {
 
   useEffect(() => {
     props.startBleScan();
-    console.log('Started BLE scan.');
   }, []);
 
   // function closeRow(rowMap, rowKey) {

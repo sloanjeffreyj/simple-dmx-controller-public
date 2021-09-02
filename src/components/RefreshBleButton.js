@@ -7,7 +7,7 @@ import { connect }  from 'react-redux';
 
 import { startBleScan } from '../redux/thunk/startBleScan.js';
 import { disconnectBleDevice } from '../redux/thunk/disconnectBleDevice.js';
-import { printConsole } from '../redux/actions/bleManagerActions.js';
+import { clearBleList } from '../redux/actions/bleManagerActions.js';
 
 // Connect to Redux for props
 function mapStateToProps(state) {
@@ -19,16 +19,18 @@ function mapStateToProps(state) {
 // Connect to Redux to dispatch
 function mapDispatchToProps(dispatch) {
   return {
-    startBleScan: () => dispatch(startBleScan()),
+    clearBleList: () => dispatch(clearBleList()),
     disconnectBleDevice: () => dispatch(disconnectBleDevice()),
-    printConsole: (console) => dispatch(printConsole(console)),
+    startBleScan: () => dispatch(startBleScan()),
   };
 }
 
 function RefreshBleButton(props) {
   const styles = createStyle();
 
+  // Currently, the 'refresh button' only clears the list of BLE devices.
   function handleClick() {
+    props.clearBleList();
     props.startBleScan();
   }
 
