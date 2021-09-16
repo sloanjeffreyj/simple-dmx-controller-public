@@ -12,7 +12,6 @@ import {
 import { useTheme } from '@react-navigation/native';
 import { connect } from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
-import { PanGestureHandler } from 'react-native-gesture-handler';
 
 import GroupConfigSlice from '../../components/GroupConfigSlice.js';
 
@@ -38,10 +37,10 @@ function GroupConfigScreen(props) {
   }
 
   return (
-    <PanGestureHandler
-      minDist={40}
-      onGestureEvent={() => props.navigation.navigate('Config')}
-    >
+    // <PanGestureHandler
+    //  minDist={40}
+     //   onGestureEvent={() => props.navigation.navigate('Config')}
+    // >
       <KeyboardAvoidingView
         // This line may be redundant? Haven't checked the iOS version yet.
         // behavior={Platform.OS === 'ios' ? 18 : 0}
@@ -57,7 +56,7 @@ function GroupConfigScreen(props) {
           />
         </View>
         </KeyboardAvoidingView>
-      </PanGestureHandler>
+      //</PanGestureHandler>
   );
 }
 
