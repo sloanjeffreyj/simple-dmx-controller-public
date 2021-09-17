@@ -98,7 +98,6 @@ function BasicUserOpScreen(props) {
     //   onGestureEvent={() => props.navigation.navigate('Config')}
     // >
       <View style={styles.container}>
-        <RefreshBleButton />
         <ConnectionStatusBar />
         <BleDevicesFlatList />
         <FlatList

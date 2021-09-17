@@ -23,7 +23,7 @@ export const readDeviceConfig = () => {
         dmxControllerResponse.then(() => {
           let responseValue = charBase64.atob(dmxControllerResponse._W.value);
           let rawArray = responseValue.split(',');
-          // console.log('rawArray: ' + rawArray);
+          
           // Position subtracted by 1 due to no operation being sent with data.
           let newNickname = '';
           if (rawArray[NICKNAME_POSITION - 1]) {

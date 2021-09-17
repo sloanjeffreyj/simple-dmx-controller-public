@@ -6,7 +6,6 @@ import {
   PRINT_CONSOLE,
 } from '../../constants/actionTypes.js';
 import { CONNECTED } from '../../constants/bleManagerStatus.js';
-import { requestBlePermission } from '../../helpers/requestBlePermission.js';
 
 const initialState = {
   bleList: [],

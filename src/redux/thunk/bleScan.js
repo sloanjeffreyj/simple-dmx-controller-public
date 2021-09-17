@@ -17,7 +17,7 @@ export const bleScan = () => {
         dispatch(scanConnectBle(device));
       }
       // Automatically connect to hardware with the controllers name. Also checks if device has name.
-      if (device.name && device.name === 'MVHS DMX') {
+      if (device != null && device.name === 'MVHS DMX') {
         dispatch(connectDevice(device));
       };
     });
