@@ -7,10 +7,10 @@ import {
   TouchableHighlight,
   View,
 } from 'react-native';
+import { SafeAreaView } from 'react-navigation';
 import { useTheme, useNavigation } from '@react-navigation/native';
 import { connect } from 'react-redux';
 import Animated from 'react-native-reanimated';
-import { TouchableOpacity, PanGestureHandler } from 'react-native-gesture-handler';
 
 import IntensitySlider from '../../components/IntensitySlider.js';
 import ConnectionStatusBar from '../../components/ConnectionStatusBar.js';
@@ -97,16 +97,15 @@ function BasicUserOpScreen(props) {
     //   minDist={40}
     //   onGestureEvent={() => props.navigation.navigate('Config')}
     // >
-      <View style={styles.container}>
-        <RefreshBleButton />
-        <ConnectionStatusBar />
-        <BleDevicesFlatList />
-        <FlatList
-          data={props.groups}
-          keyExtractor={(item) => item.id}
-          renderItem={renderGroupList}
-        />
-        </View>
+    <SafeAreaView style={styles.container}>
+      <ConnectionStatusBar />
+      <BleDevicesFlatList />
+      <FlatList
+        data={props.groups}
+        keyExtractor={(item) => item.id}
+        renderItem={renderGroupList}
+      />
+    </SafeAreaView>  
       // </PanGestureHandler>
   );
 }
@@ -118,7 +117,7 @@ function createStyle() {
       alignContent: 'center',
       flex: 1,
       margin: '3%',
-      marginTop: 4,
+      marginTop: 6,
     },
     
     text: {
