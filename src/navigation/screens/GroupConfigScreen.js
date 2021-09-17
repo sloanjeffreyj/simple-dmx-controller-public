@@ -46,7 +46,7 @@ function GroupConfigScreen(props) {
         <SafeAreaView style={styles.container}>
           <KeyboardAvoidingView
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-            style={{flex: 1}}
+            style={{flex: 1, alignItems: 'center'}}
           >
             <Text style={styles.title}>Config - Separate Circuits with Commas</Text>
             <FlatList
@@ -68,6 +68,7 @@ function createStyle() {
     container: {
       flex: 1,
       alignContent: 'center',
+      alignItems: 'center',
     },
     flatList: {
       width: '95%',
@@ -76,6 +77,7 @@ function createStyle() {
       color: colors.text,
       fontSize: 18,
       marginBottom: 4,
+      marginTop: 4,
     },
   });
   return styles;

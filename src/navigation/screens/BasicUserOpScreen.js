@@ -97,18 +97,7 @@ function BasicUserOpScreen(props) {
     //   minDist={40}
     //   onGestureEvent={() => props.navigation.navigate('Config')}
     // >
-<<<<<<< HEAD
-      <View style={styles.container}>
-        <ConnectionStatusBar />
-        <BleDevicesFlatList />
-        <FlatList
-          data={props.groups}
-          keyExtractor={(item) => item.id}
-          renderItem={renderGroupList}
-        />
-        </View>
-=======
-    <SafeAreaView style={styles.container}>
+      <SafeAreaView style={styles.container}>
       <ConnectionStatusBar />
       <BleDevicesFlatList />
       <FlatList
@@ -116,8 +105,8 @@ function BasicUserOpScreen(props) {
         keyExtractor={(item) => item.id}
         renderItem={renderGroupList}
       />
-    </SafeAreaView>  
->>>>>>> ba26bd69453af9952e878e6929f972c11147b1d4
+      </SafeAreaView>
+      
       // </PanGestureHandler>
   );
 }
