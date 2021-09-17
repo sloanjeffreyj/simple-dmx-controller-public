@@ -10,9 +10,9 @@ import {
   Platform,
 } from 'react-native';
 import { useTheme } from '@react-navigation/native';
+import { SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
-import { PanGestureHandler } from 'react-native-gesture-handler';
 
 import GroupConfigSlice from '../../components/GroupConfigSlice.js';
 
@@ -38,26 +38,27 @@ function GroupConfigScreen(props) {
   }
 
   return (
-    <PanGestureHandler
-      minDist={40}
-      onGestureEvent={() => props.navigation.navigate('Config')}
-    >
-      <KeyboardAvoidingView
-        // This line may be redundant? Haven't checked the iOS version yet.
-        // behavior={Platform.OS === 'ios' ? 18 : 0}
-        style={{flex: 1}}
-      >
-        <View style={styles.container}>
-          <Text style={styles.title}>Config - Separate Circuits with Commas</Text>
-          <FlatList
-            data={props.groups}
-            renderItem={renderGroupSlices}
-            keyExtractor={(item) => item.id}
-            removeClippedSubviews={false}
-          />
-        </View>
-        </KeyboardAvoidingView>
-      </PanGestureHandler>
+    // <PanGestureHandler
+    //  minDist={40}
+     //   onGestureEvent={() => props.navigation.navigate('Config')}
+    // >
+      
+        <SafeAreaView style={styles.container}>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            style={{flex: 1}}
+          >
+            <Text style={styles.title}>Config - Separate Circuits with Commas</Text>
+            <FlatList
+              data={props.groups}
+              renderItem={renderGroupSlices}
+              keyExtractor={(item) => item.id}
+              removeClippedSubviews={false}
+            />
+          </KeyboardAvoidingView>
+        </SafeAreaView>
+      
+      //</PanGestureHandler>
   );
 }
 
@@ -66,8 +67,7 @@ function createStyle() {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      alignItems: 'center',
-      marginTop: (Platform.OS === 'ios') ? 18 : 2,
+      alignContent: 'center',
     },
     flatList: {
       width: '95%',
