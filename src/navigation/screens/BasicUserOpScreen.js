@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
+  Animated,
   FlatList,
   StatusBar,
   StyleSheet,
@@ -10,7 +11,7 @@ import {
 import { SafeAreaView } from 'react-navigation';
 import { useTheme, useNavigation } from '@react-navigation/native';
 import { connect } from 'react-redux';
-import Animated from 'react-native-reanimated';
+import { PanGestureHandler } from 'react-native-gesture-handler';
 
 import IntensitySlider from '../../components/IntensitySlider.js';
 import ConnectionStatusBar from '../../components/ConnectionStatusBar.js';
@@ -93,21 +94,22 @@ function BasicUserOpScreen(props) {
   }
 
   return (
-    // <PanGestureHandler
-    //   minDist={40}
-    //   onGestureEvent={() => props.navigation.navigate('Config')}
-    // >
       <SafeAreaView style={styles.container}>
-      <ConnectionStatusBar />
-      <BleDevicesFlatList />
-      <FlatList
-        data={props.groups}
-        keyExtractor={(item) => item.id}
-        renderItem={renderGroupList}
-      />
+        <PanGestureHandler
+          minDist={40}
+          onGestureEvent={() => props.navigation.navigate('Config')}
+        >
+          <View style={{flex: 1}}>
+            <ConnectionStatusBar />
+            <BleDevicesFlatList />
+            <FlatList
+              data={props.groups}
+              keyExtractor={(item) => item.id}
+              renderItem={renderGroupList}
+            />
+          </View>
+        </PanGestureHandler>
       </SafeAreaView>
-      
-      // </PanGestureHandler>
   );
 }
 
