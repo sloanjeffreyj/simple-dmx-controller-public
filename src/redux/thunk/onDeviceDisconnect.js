@@ -6,7 +6,8 @@ export const onDeviceDisconnect = (device) => {
     const checkDisconnectSubscription = device.onDisconnected((device) => {
       dispatch(clearBleList());
       dispatch(startBleScan());
-      checkDisconnectSubscription.remove();
+      // Not sure if this line is needed or not 10/18/21
+      // checkDisconnectSubscription.remove();
     });
   }
 }

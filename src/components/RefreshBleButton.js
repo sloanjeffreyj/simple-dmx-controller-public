@@ -13,7 +13,9 @@ import { CONNECTED } from '../constants/bleManagerStatus.js';
 // Connect to Redux for props
 function mapStateToProps(state) {
   return {
-    bleManager: state.bleManager
+    bleManager: state.bleManager,
+    status: state.status,
+    device: state.connectedDevice,
   }
 }
 
@@ -29,10 +31,13 @@ function mapDispatchToProps(dispatch) {
 function RefreshBleButton(props) {
   const styles = createStyle();
 
-  // Currently, the 'refresh button' only clears the list of BLE devices.
   function handleClick() {
-    if (props.bleManager.status === CONNECTED) {
-      props.clearBleList();
+    if (props.connectedDevice) {
+      console.log('Connected Devices: ');
+      console.log(props.connectedDevice);
+      props.disconnectBleDevice(props.connectedDevice);
+    }
+    else {
       props.startBleScan();
     }
   }

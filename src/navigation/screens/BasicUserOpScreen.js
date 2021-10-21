@@ -101,6 +101,7 @@ function BasicUserOpScreen(props) {
         >
           <View style={{flex: 1}}>
             <ConnectionStatusBar />
+            <RefreshBleButton />
             <BleDevicesFlatList />
             <FlatList
               data={props.groups}
