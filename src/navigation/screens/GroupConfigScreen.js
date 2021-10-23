@@ -41,12 +41,12 @@ function GroupConfigScreen(props) {
   return (
         <SafeAreaView style={styles.container}>
           <KeyboardAvoidingView
-            style={{flex: 1, alignItems: 'center'}}
+            style={{flex: 1}}
           >
             <PanGestureHandler
-            minDist={40}
-            onGestureEvent={() => props.navigation.navigate('Basic User Operation')}
-          >
+              minDist={40}
+              onGestureEvent={() => props.navigation.navigate('Basic User Operation')}
+            >
             <View style={{flex: 1}}>
               <Text style={styles.title}>Config - Separate Circuits with Commas</Text>
               <FlatList
@@ -69,11 +69,13 @@ function createStyle() {
       flex: 1,
       alignContent: 'center',
       alignItems: 'center',
+      marginTop: 6,
     },
     flatList: {
       width: '95%',
     },
     title: {
+      alignSelf: 'center',
       color: colors.text,
       fontSize: 18,
       marginBottom: 4,
