@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
+  Platform,
   View,
   Text,
   TextInput,
@@ -116,6 +117,7 @@ function ConnectGroupConfigSlice(props) {
         <Text style={styles.text}>Group: </Text>
         <TextInput
           style={styles.textInput}
+          clearTextOnFocus={true}
           defaultValue={selectDisplayName(props.nickname, props.id).toString()}
           onSubmitEditing={(value) => handleNicknameChange(value)}
           returnKeyType={'done'}
@@ -130,7 +132,7 @@ function ConnectGroupConfigSlice(props) {
           style={styles.textInput}
           onSubmitEditing={(value) => handleCircuitChange(value)}
           defaultValue={formatCircuitTextDisplay(JSON.stringify(props.circuits))}
-          keyboardType={'numeric'}
+          keyboardType={Platform.OS === 'ios' ? 'numbers-and-punctuation' : 'numeric'}
           multiline={true}
           returnKeyType={'done'}
           onChangeText={(value) => setDisplayCircuits(formatCircuitText(value))}

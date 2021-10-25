@@ -123,7 +123,6 @@ function createStyle() {
       margin: '3%',
       marginTop: 6,
     },
-    
     text: {
       color: colors.text,
     },
