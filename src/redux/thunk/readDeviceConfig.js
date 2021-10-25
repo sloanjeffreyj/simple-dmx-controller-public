@@ -22,6 +22,8 @@ export const readDeviceConfig = () => {
         )
         dmxControllerResponse.then(() => {
           let responseValue = charBase64.atob(dmxControllerResponse._W.value);
+          console.log('incoming value: ');
+          console.log(responseValue)
           let rawArray = responseValue.split(',');
           
           // Position subtracted by 1 due to no operation being sent with data.
@@ -38,7 +40,7 @@ export const readDeviceConfig = () => {
             circuits: [],
           };
 
-          let newCircuits = [MAX_CHANNELS];
+          let newCircuits = [];
           for (let j = 0; j < MAX_CHANNELS; j++) {
             newCircuits[j] = Number(rawArray[CHANNEL_START_POSITION + j - 1]);
           };
@@ -46,7 +48,6 @@ export const readDeviceConfig = () => {
           dispatch(setGroupConfig(newGroup));
           // console.log("Read value from CHARACTERISTIC_INFO_UUID: ", newGroup.circuits);
         });
-        // return true;
       } catch (error) {
         console.log('readDeviceConfig Error: ', error);
         return false;

@@ -104,9 +104,10 @@ function ConnectGroupConfigSlice(props) {
 
   function formatCircuitTextDisplay(circuits) {
     let unformattedCircuits = JSON.stringify(circuits);
-    let semiFormattedCircuits = unformattedCircuits.replace(/[^0-9,-]/g, '');
-    let formattedCircuits = semiFormattedCircuits.replace(/,0/g, '');
-    return formattedCircuits;
+    let formattedCircuits0 = unformattedCircuits.replace(/[^0-9,-]/g, '');
+    let formattedCircuits1 = formattedCircuits0.replace(/,0/g, '');
+    let formattedCircuits2 = formattedCircuits1.replace(/,,/g, ',');
+    return formattedCircuits2;
   }
 
   return (
