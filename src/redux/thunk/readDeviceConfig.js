@@ -14,15 +14,16 @@ import {
 export const readDeviceConfig = () => {
   return (dispatch, getState, DeviceManager) => {
     const state = getState();
-    for (let i = 0; i < MAX_GROUPS; i++) {
+    for (let i = 0; i < 1; i++) {
       try {
         let dmxControllerResponse = state.bleManager.connectedDevice.readCharacteristicForService(
           SERVICE_UUID,
           CHARACTERISTIC_INFO_UUID
         )
         dmxControllerResponse.then(() => {
+          console.log('dmxControllerResponse: ', dmxControllerResponse);
           let responseValue = charBase64.atob(dmxControllerResponse._W.value);
-          console.log('incoming value: ');
+          console.log('reponseValue: ');
           console.log(responseValue)
           let rawArray = responseValue.split(',');
           
