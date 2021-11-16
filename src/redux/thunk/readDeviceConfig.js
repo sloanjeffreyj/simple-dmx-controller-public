@@ -1,6 +1,6 @@
 import {
   SERVICE_UUID,
-  CHARACTERISTIC_OPERATION_UUID,
+  CHARACTERISTIC_INFO_UUID,
 } from '../../constants/microControllerUuid.js';
 import { setGroupConfig } from '../actions/setGroupConfig.js';
 import charBase64 from '../../helpers/charBase64.js';
@@ -22,7 +22,7 @@ export const readDeviceConfig = () => {
       let dmxControllerResponse =
         state.bleManager.connectedDevice.readCharacteristicForService(
           SERVICE_UUID,
-          CHARACTERISTIC_OPERATION_UUID
+          CHARACTERISTIC_INFO_UUID
         );
       dmxControllerResponse.then(() => {
         console.log('dmxControllerResponse: ', dmxControllerResponse);
