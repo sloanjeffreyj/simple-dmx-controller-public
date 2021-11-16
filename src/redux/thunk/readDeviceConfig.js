@@ -1,6 +1,7 @@
 import {
   SERVICE_UUID,
   CHARACTERISTIC_INFO_UUID,
+  CHARACTERISTIC_OPERATION_UUID,
 } from '../../constants/microControllerUuid.js';
 import { setGroupConfig } from '../actions/setGroupConfig.js';
 import charBase64 from '../../helpers/charBase64.js';
@@ -21,7 +22,7 @@ export const readDeviceConfig = () => {
     let characteristicObject =
       state.bleManager.connectedDevice.monitorCharacteristicForService(
         SERVICE_UUID,
-        CHARACTERISTIC_INFO_UUID,
+        CHARACTERISTIC_OPERATION_UUID,
         (error, characteristic) => {
           if (error) {
             console.log('error');
