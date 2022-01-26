@@ -1,4 +1,9 @@
-import { updateStatus, scanConnectBle, clearBleList, printConsole } from '../actions/bleManagerActions.js';
+import {
+  updateStatus,
+  scanConnectBle,
+  clearBleList,
+  printConsole,
+} from '../actions/bleManagerActions.js';
 import { SCANNING, BLE_ERROR } from '../../constants/bleManagerStatus.js';
 import { connectDevice } from '../../redux/thunk/connectDevice.js';
 
@@ -16,10 +21,10 @@ export const bleScan = () => {
         dispatch(updateStatus(SCANNING));
         dispatch(scanConnectBle(device));
       }
-      // Automatically connect to hardware with the controllers name. Also checks if device has name.
-      if (device != null && device.name === 'MVHS DMX') {
+      // Automatically connect to hardware with the controllers name.
+      if (device != null && device.name === 'MVHS DMX 1') {
         dispatch(connectDevice(device));
-      };
+      }
     });
   };
 };
