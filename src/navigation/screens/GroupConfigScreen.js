@@ -13,15 +13,21 @@ import { useTheme } from '@react-navigation/native';
 import { SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
-import { PanGestureHandler } from 'react-native-gesture-handler';
+import {
+  PanGestureHandler,
+  TouchableHighlight,
+} from 'react-native-gesture-handler';
 
 import GroupConfigSlice from '../../components/GroupConfigSlice.js';
+import ConnectionStatusBar from '../../components/ConnectionStatusBar.js';
 
 function mapStateToProps(state) {
   return {
     groups: state.groups.groups,
   };
 }
+
+function onPressCreateGroup() {}
 
 // Config groups of circuits and their names.
 function GroupConfigScreen(props) {
@@ -39,26 +45,32 @@ function GroupConfigScreen(props) {
   }
 
   return (
-        <SafeAreaView style={styles.container}>
-          <KeyboardAvoidingView
-            style={{flex: 1}}
-          >
-            <PanGestureHandler
-              minDist={40}
-              onGestureEvent={() => props.navigation.navigate('Basic User Operation')}
-            >
-            <View style={{flex: 1}}>
-              <Text style={styles.title}>Config - Separate Circuits with Commas</Text>
-              <FlatList
-                data={props.groups}
-                renderItem={renderGroupSlices}
-                keyExtractor={(item) => item.id}
-                removeClippedSubviews={false}
-              />
-            </View>
-            </PanGestureHandler>
-          </KeyboardAvoidingView>
-        </SafeAreaView>
+    <SafeAreaView style={styles.container}>
+      <KeyboardAvoidingView style={{ flex: 1 }}>
+        <ConnectionStatusBar />
+        <TouchableHighlight>
+          <Text>Button</Text>
+        </TouchableHighlight>
+        <PanGestureHandler
+          minDist={40}
+          onGestureEvent={() =>
+            props.navigation.navigate('Basic User Operation')
+          }
+        >
+          <View style={{ flex: 1 }}>
+            <Text style={styles.title}>
+              Config - Separate Circuits with Commas
+            </Text>
+            <FlatList
+              data={props.groups}
+              renderItem={renderGroupSlices}
+              keyExtractor={(item) => item.id}
+              removeClippedSubviews={false}
+            />
+          </View>
+        </PanGestureHandler>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 }
 

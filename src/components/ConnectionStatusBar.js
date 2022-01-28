@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, Text, StyleSheet, View } from 'react-native';
+import { Text, StyleSheet, View } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { connect } from 'react-redux';
 
@@ -16,13 +16,17 @@ function ConnectionStatusBar(props) {
   const styles = createStyle();
 
   return (
-      <View style={styles.statusContainer}>
-        {(props.bleManager.status === CONNECTED && props.bleManager.connectedDevice)
-          ? <Text style={styles.statusConnected}>{props.bleManager.status} to: {props.bleManager.connectedDevice.name}</Text>
-          : <Text style={styles.status}>{props.bleManager.status}</Text>
-        }
+    <View style={styles.statusContainer}>
+      {props.bleManager.status === CONNECTED &&
+      props.bleManager.connectedDevice ? (
+        <Text style={styles.statusConnected}>
+          {props.bleManager.status} to: {props.bleManager.connectedDevice.name}
+        </Text>
+      ) : (
+        <Text style={styles.status}>{props.bleManager.status}</Text>
+      )}
     </View>
-  )
+  );
 }
 
 function createStyle() {
@@ -48,11 +52,12 @@ function createStyle() {
       fontSize: 16,
       margin: 5,
       padding: 5,
-    }
+    },
   });
   return styles;
 }
 
-const ConnectedConnectionStatusBar = connect(mapStateToProps)(ConnectionStatusBar);
+const ConnectedConnectionStatusBar =
+  connect(mapStateToProps)(ConnectionStatusBar);
 
 export default ConnectedConnectionStatusBar;

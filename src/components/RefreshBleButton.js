@@ -3,7 +3,7 @@
 import React from 'react';
 import { Text, TouchableHighlight, StyleSheet, View } from 'react-native';
 import { useTheme } from '@react-navigation/native';
-import { connect }  from 'react-redux';
+import { connect } from 'react-redux';
 
 import { startBleScan } from '../redux/thunk/startBleScan.js';
 import { disconnectBleDevice } from '../redux/thunk/disconnectBleDevice.js';
@@ -16,7 +16,7 @@ function mapStateToProps(state) {
     bleManager: state.bleManager,
     status: state.status,
     device: state.connectedDevice,
-  }
+  };
 }
 
 // Connect to Redux to dispatch
@@ -36,22 +36,18 @@ function RefreshBleButton(props) {
       console.log('Connected Devices: ');
       console.log(props.connectedDevice);
       props.disconnectBleDevice(props.connectedDevice);
-    }
-    else {
+    } else {
       props.startBleScan();
     }
   }
 
   return (
     <View style={styles.container}>
-      <TouchableHighlight
-        onPress={() => handleClick()}
-        style={styles.button}
-      >
-      <Text style={styles.text}>Refresh Scan</Text>
+      <TouchableHighlight onPress={() => handleClick()} style={styles.button}>
+        <Text style={styles.text}>Refresh Scan</Text>
       </TouchableHighlight>
     </View>
-  )
+  );
 }
 
 function createStyle() {
@@ -77,14 +73,14 @@ function createStyle() {
       alignSelf: 'center',
       color: colors.text,
       fontSize: 16,
-    }
+    },
   });
   return styles;
 }
 
 const ConnectedRefreshBleButton = connect(
   mapStateToProps,
-  mapDispatchToProps)
-  (RefreshBleButton);
+  mapDispatchToProps
+)(RefreshBleButton);
 
 export default ConnectedRefreshBleButton;

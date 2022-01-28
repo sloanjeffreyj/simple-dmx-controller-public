@@ -6,6 +6,7 @@ import {
 } from '../actions/bleManagerActions.js';
 import { SCANNING, BLE_ERROR } from '../../constants/bleManagerStatus.js';
 import { connectDevice } from '../../redux/thunk/connectDevice.js';
+import { waitToScanAlert } from '../../components/alertDialogues/waitToScanAlert.js';
 
 export const bleScan = () => {
   return (dispatch, getState, DeviceManager) => {
@@ -14,8 +15,8 @@ export const bleScan = () => {
     DeviceManager.startDeviceScan(null, null, (error, device) => {
       if (error) {
         dispatch(updateStatus(BLE_ERROR));
-        dispatch(printConsole(error.message));
-        console.log(error);
+        console.log('error in scanning: ' + error.reason);
+        waitToScanAlert();
       }
       if (device !== null) {
         dispatch(updateStatus(SCANNING));

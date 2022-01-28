@@ -71,10 +71,10 @@ export default function bleManagerReducer(state = initialState, action) {
     case SCAN_CONNECT_BLE:
       if (
         state.bleList.some((device) => device.id === action.device.id) ||
-        action.device.name === null) {
+        action.device.name === null
+      ) {
         return state;
-      }
-      else {
+      } else {
         const newBle = [...state.bleList, action.device];
         return {
           ...state,
@@ -109,13 +109,13 @@ export default function bleManagerReducer(state = initialState, action) {
         bleList: [],
         connectedDevice: {},
         status: state.status,
-      }
+      };
 
-      case PRINT_CONSOLE:
-        return {
-          ...state,
-          console: action.payload,
-        }
+    case PRINT_CONSOLE:
+      return {
+        ...state,
+        console: action.payload,
+      };
 
     default:
       return state;

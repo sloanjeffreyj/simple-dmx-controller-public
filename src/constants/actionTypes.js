@@ -4,6 +4,7 @@ export const SET_NICKNAME = 'SET_NICKNAME';
 export const SET_CIRCUITS = 'SET_CIRCUITS';
 export const SET_GROUP_CONFIG = 'SET_GROUP_CONFIG';
 export const READ_GROUP_CONFIG = 'READ_GROUP_CONFIG';
+export const CREATE_GROUP = 'CREATE_GROUP';
 
 // BLE Manager actions.
 export const SCAN_CONNECT_BLE = 'SCAN_CONNECT_BLE';

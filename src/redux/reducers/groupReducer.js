@@ -5,10 +5,13 @@ import {
   SET_CIRCUITS,
   SET_GROUP_CONFIG,
   READ_GROUP_CONFIG,
+  CREATE_GROUP,
 } from '../../constants/actionTypes.js';
+import { MAX_GROUPS } from '../../constants/groups.js';
+import { groupCreator } from '../../helpers/groupCreator.js';
 
 const initialState = {
-  groups: initGroupCreation(10),
+  groups: initGroupCreation(1),
 };
 
 function replaceGroupInfo(state, action) {
@@ -54,6 +57,15 @@ export default function groupReducer(state = initialState, action) {
       return Object.assign({}, state, {
         groups: readGroupConfig,
       });
+
+    case CREATE_GROUP:
+      let numOfGroups = Object.keys(state.groups).length;
+      if (numOfGroups < MAX_GROUPS) {
+        let newGroup = groupCreator(numOfGroups);
+        let newState = [...state];
+        newState.groups.push(newGroup);
+        return newState;
+      }
 
     default:
       return state;

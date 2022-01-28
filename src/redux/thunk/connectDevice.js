@@ -14,6 +14,7 @@ import {
   SCANNING,
   LOADING,
 } from '../../constants/bleManagerStatus.js';
+import { error_deviceAlreadyConnected } from '../../constants/bleErrors.js';
 
 export const connectDevice = (device) => {
   return (dispatch, getState, DeviceManager) => {
@@ -38,10 +39,14 @@ export const connectDevice = (device) => {
         return device;
       })
       .catch((error) => {
-        console.log(error);
-        dispatch(updateStatus(SCANNING));
-        dispatch(clearBleList());
-        dispatch(startBleScan());
+        console.log('Error in connecting device: ' + error.message);
+        if (error.message == error_deviceAlreadyConnected) {
+          return;
+        } else {
+          dispatch(updateStatus(SCANNING));
+          dispatch(clearBleList());
+          dispatch(startBleScan());
+        }
       });
   };
 };

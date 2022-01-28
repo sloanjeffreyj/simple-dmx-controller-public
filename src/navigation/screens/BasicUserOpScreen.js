@@ -72,9 +72,8 @@ function BasicUserOpScreen(props) {
           extraData={props.bleList}
           renderItem={(data) => renderBleDevices(data)}
         />
-      )
-    }
-    else {
+      );
+    } else {
       return null;
     }
   }
@@ -94,23 +93,23 @@ function BasicUserOpScreen(props) {
   }
 
   return (
-      <SafeAreaView style={styles.container}>
-        <PanGestureHandler
-          minDist={40}
-          onGestureEvent={() => props.navigation.navigate('Config')}
-        >
-          <View style={{flex: 1}}>
-            <ConnectionStatusBar />
-            <RefreshBleButton />
-            <BleDevicesFlatList />
-            <FlatList
-              data={props.groups}
-              keyExtractor={(item) => item.id}
-              renderItem={renderGroupList}
-            />
-          </View>
-        </PanGestureHandler>
-      </SafeAreaView>
+    <SafeAreaView style={styles.container}>
+      <PanGestureHandler
+        minDist={40}
+        onGestureEvent={() => props.navigation.navigate('Config')}
+      >
+        <View style={{ flex: 1 }}>
+          <ConnectionStatusBar />
+          <RefreshBleButton />
+          <BleDevicesFlatList />
+          <FlatList
+            data={props.groups}
+            keyExtractor={(item) => item.id}
+            renderItem={renderGroupList}
+          />
+        </View>
+      </PanGestureHandler>
+    </SafeAreaView>
   );
 }
 
@@ -136,7 +135,7 @@ function createStyle() {
       justifyContent: 'center',
       height: 50,
       width: '70%',
-    }
+    },
   });
   return styles;
 }
