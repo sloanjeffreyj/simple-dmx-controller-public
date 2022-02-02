@@ -58,6 +58,7 @@ export default function groupReducer(state = initialState, action) {
         groups: readGroupConfig,
       });
 
+    // Not currently implemented.
     case CREATE_GROUP:
       let numOfGroups = Object.keys(state.groups).length;
       if (numOfGroups < MAX_GROUPS) {

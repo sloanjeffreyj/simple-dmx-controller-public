@@ -15,12 +15,15 @@ import setGroupCircuits from '../redux/actions/setGroupCircuits.js';
 import setGroupConfig from '../redux/actions/setGroupConfig.js';
 import { updateGroupConfig } from '../redux/thunk/updateGroupConfig.js';
 import selectDisplayName from '../helpers/selectDisplayName.js';
-import { RESTART_DEVICE_CODE, SET_CONFIG_CODE } from '../constants/actionTypes.js'
-import { MAX_CHANNELS } from '../constants/groups.js'
+import {
+  RESTART_DEVICE_CODE,
+  SET_CONFIG_CODE,
+} from '../constants/actionTypes.js';
+import { MAX_CHANNELS } from '../constants/groups.js';
 
 function dispatchSetGroupConfig(dispatch) {
   return {
-    setGroupConfig : (groupInfo) => dispatch(setGroupConfig(groupInfo)),
+    setGroupConfig: (groupInfo) => dispatch(setGroupConfig(groupInfo)),
     updateGroupConfig: (groupInfo) => dispatch(updateGroupConfig(groupInfo)),
     setGroupNickname: (groupInfo) => dispatch(setGroupNickname(groupInfo)),
     setGroupCircuits: (groupInfo) => dispatch(setGroupCircuits(groupInfo)),
@@ -56,7 +59,6 @@ function ConnectGroupConfigSlice(props) {
     formattedString = formattedString.split(',');
 
     // Turn ranges of numbers (ex. "10-12") into individual int's separated by commas (ex. "10,11,12").
-    // Handle range of numbers from user input (ex. 20-45). Transformed into all numbers inbetween.
     // if (x.indexOf('-') > -1) {
     //   let circuitRangeString = x.split('-');
     //   let beginRange = parseInt(circuitRange[0]);
@@ -96,18 +98,18 @@ function ConnectGroupConfigSlice(props) {
     props.updateGroupConfig(groupInfo);
   }
 
-  // Format circuits for display to user
   function formatCircuitText(circuits) {
     let unformattedCircuits = JSON.stringify(circuits);
     let formattedCircuits = unformattedCircuits.replace(/[^0-9,-]/g, '');
     return formattedCircuits;
   }
 
+  // Format circuits for display to user
   function formatCircuitTextDisplay(circuits) {
     let unformattedCircuits = JSON.stringify(circuits);
     let formattedCircuits0 = unformattedCircuits.replace(/[^0-9,-]/g, '');
     let formattedCircuits1 = formattedCircuits0.replace(/,0/g, '');
-    let formattedCircuits2 = formattedCircuits1.replace(/,,/g, ',');
+    let formattedCircuits2 = formattedCircuits1.replace(/,,/g, '');
     return formattedCircuits2;
   }
 
@@ -131,8 +133,12 @@ function ConnectGroupConfigSlice(props) {
           numberOfLines={1}
           style={styles.textInput}
           onSubmitEditing={(value) => handleCircuitChange(value)}
-          defaultValue={formatCircuitTextDisplay(JSON.stringify(props.circuits))}
-          keyboardType={Platform.OS === 'ios' ? 'numbers-and-punctuation' : 'numeric'}
+          defaultValue={formatCircuitTextDisplay(
+            JSON.stringify(props.circuits)
+          )}
+          keyboardType={
+            Platform.OS === 'ios' ? 'numbers-and-punctuation' : 'numeric'
+          }
           multiline={true}
           returnKeyType={'done'}
           onChangeText={(value) => setDisplayCircuits(formatCircuitText(value))}

@@ -48,9 +48,6 @@ function GroupConfigScreen(props) {
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView style={{ flex: 1 }}>
         <ConnectionStatusBar />
-        <TouchableHighlight>
-          <Text>Button</Text>
-        </TouchableHighlight>
         <PanGestureHandler
           minDist={40}
           onGestureEvent={() =>
