@@ -4,7 +4,7 @@
 ---
 ## Description
 
-The code for the Arduino is found in this repository. You can find the app on the Play Store under "Companion for Simple DMX Micro Controller". iOS version coming soon.
+You can find the app on the Play Store under "Companion for Simple DMX Micro Controller". iOS version coming soon.
 
 This hardware and application was designed for non-technical personnel who regularly require stage lighting when technicians are not around but does have other applications, as it can interface with any lighting system that uses DMX.
 
